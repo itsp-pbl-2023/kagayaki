@@ -1,0 +1,59 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans", "Open Sans", -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+  color: #333333;
+}
+
+/* デフォルトをflex-box化 */
+div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  animation-name: fadeInAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+main {
+  width: 800px;
+  margin: auto;
+}
+
+a {
+  color: #2f7d95;
+  &:hover {
+    color: #2a6679;
+  }
+}
+
+ul {
+  margin-block-end: 0;
+  padding-inline-start: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* その場で */
+.fade-in {
+  animation-name: fadeInAnime;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInAnime {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
