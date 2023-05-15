@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
 import Link from "next/link";
+import Counter from "./Counter";
 
 export default function Home() {
   return (
@@ -14,8 +15,23 @@ export default function Home() {
           height={100}
         />
       </div>
-      <div className={styles.link}>
+      <div>
         <Link href="/presentation">発表ページへ</Link>
+      </div>
+      <div>
+        <Link href="/feedback">フィードバックページへ</Link>
+      </div>
+      <div>
+        <Link href="/test/recording">録音のテストページへ</Link>
+      </div>
+      <div>
+        <Link href="/test/chatgpt">ChatGPT APIのテストページへ</Link>
+      </div>
+      <div>
+        <Link href="/test/wisper">Wisper APIのテストページへ</Link>
+      </div>
+      <div>
+        <Counter />
       </div>
     </main>
   );
