@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import Counter from "./Counter";
+import Upload from "./Upload";
 
 export default function Home() {
   return (
@@ -32,6 +33,9 @@ export default function Home() {
       </div>
       <div>
         <Counter />
+      </div>
+      <div>
+        <Upload />
       </div>
     </main>
   );
