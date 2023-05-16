@@ -16,5 +16,5 @@ docker-compose up
 ### 2 回目以降
 
 ```
-docker compose up
+docker-compose up
 ```
