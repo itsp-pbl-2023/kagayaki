@@ -9,6 +9,8 @@
 ### 初回
 
 ```
+docker-compose run --rm app sh
+npm install
 docker-compose build
 docker-compose up
 ```
