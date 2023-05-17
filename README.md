@@ -18,5 +18,5 @@ docker compose up
 不足しているパッケージは起動時に自動的にインストールされます。
 
 ```
-docker compose up
+docker-compose up
 ```
