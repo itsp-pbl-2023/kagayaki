@@ -9,11 +9,13 @@
 ### 初回
 
 ```
-docker-compose build
-docker-compose up
+docker compose build
+docker compose up
 ```
 
 ### 2 回目以降
+
+不足しているパッケージは起動時に自動的にインストールされます。
 
 ```
 docker compose up
