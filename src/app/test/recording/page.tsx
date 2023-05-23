@@ -5,7 +5,7 @@
 
 "use client";
 
-import styles from "./page.module.scss";
+import styles from "./page.module.css";
 import Link from "next/link";
 
 import { KeyboardEvent, useState, useRef, useEffect } from "react";
