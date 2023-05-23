@@ -85,47 +85,37 @@ const PostNew = () => {
   return (
     <main className={styles.main}>
       <div>ここは録音のテストページです。</div>
-      <div className="fixed bottom-0 left-2 right-2 h-40 flex flex-col justify-end items-center bg-[#7494C0] pb-5">
-        <div className="w-[60px]">
-          {loading ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
-                <StopIcon className="h-7 w-7 text-white" />
-              </div>
-              <div className="text-white font-bold">
-                <span>{("0" + minutes).slice(-2)}</span>:
-                <span>{("0" + seconds).slice(-2)}</span>
-              </div>
-              <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
-                <PlayIcon className="h-7 w-7 text-white" onClick={playAudio} />
-              </div>
-            </div>
-          ) : recording ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
-                <StopIcon
-                  className="h-7 w-7 cursor-pointer text-white"
-                  onClick={stopRecording}
-                />
-              </div>
-              <div className="text-white font-bold">
-                <span>{("0" + minutes).slice(-2)}</span>:
-                <span>{("0" + seconds).slice(-2)}</span>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-                <MicrophoneIcon
-                  className="h-7 w-7 cursor-pointer text-gray-700"
-                  onClick={startRecording}
-                />
-              </div>
-              <div className="text-white font-bold">00:00</div>
-            </div>
-          )}
+      {loading ? (
+        <div>
+          <div>
+            <StopIcon />
+          </div>
+          <div>
+            <span>{("0" + minutes).slice(-2)}</span>:
+            <span>{("0" + seconds).slice(-2)}</span>
+          </div>
+          <div>
+            <PlayIcon onClick={playAudio} />
+          </div>
         </div>
-      </div>
+      ) : recording ? (
+        <div>
+          <div>
+            <StopIcon onClick={stopRecording} />
+          </div>
+          <div>
+            <span>{("0" + minutes).slice(-2)}</span>:
+            <span>{("0" + seconds).slice(-2)}</span>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div>
+            <MicrophoneIcon onClick={startRecording} />
+          </div>
+          <div>00:00</div>
+        </div>
+      )}
       <div className={styles.link}>
         <Link href="/">ルートページへ</Link>
       </div>
