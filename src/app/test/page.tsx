@@ -29,8 +29,8 @@ export default function Home() {
         <Image
           src="/kagayaki.png"
           alt="KAGAYAKIの大地"
-          width={100}
-          height={100}
+          width={50}
+          height={50}
         />
       </div>
     </main>
