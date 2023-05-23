@@ -86,13 +86,15 @@ git switch -c <新しい作業ブランチ名>
 - `page.module.css`：そのページの CSS（スタイリング）を記述します。
 - `layout.tsx`：その**ディレクトリ以下のページ全てに共通**する部分を記述します。
 
-### `/components`
+`/test`ディレクトリは実験用のページです。何かを試したいときに気軽に使ってください。最終的には廃止します。
+
+### `/app/components`
 
 コンポーネント（UI の部品）は全てここに入れます。ページファイルから `import` して使用する際は以下のようにすると良いです。（`Counter.tsx`の例）
 ※`@`は`/src`直下のディレクトリを指します。
 
 ```
-import Counter from "@/components/Counter"
+import Counter from "@/app/components/Counter"
 
 export default function Home() {
   return (
@@ -103,7 +105,7 @@ export default function Home() {
 }
 ```
 
-### `/context`
+### `/app/context`
 
 コンテキストはこのフォルダの`store.tsx`で管理します。全ページ間で共有したい**State**（状態）はここに追加し、`useAppContext()`で読み込みます。
 より具体的には以下の手順で新規のコンテキストを追加することができます。
@@ -112,7 +114,7 @@ export default function Home() {
 2.  コンテキストを読み込みたいページやコンポーネントで以下のようにしてコンテキストを読み込んだり、更新したりする。（`Counter.tsx`の例）
 
 ```
-import { useAppContext } from "@/context/store";
+import { useAppContext } from "@/app/context/store";
 
 export default function Counter() {
   const { count, setCount } = useAppContext();
@@ -131,9 +133,10 @@ export default function Counter() {
 }
 ```
 
-### `/api`
+### `/app/api`
 
-ChatGPT API、Wisper API など非同期処理の部分は全てここに入れます。（加筆中）
+ChatGPT API、Wisper API など非同期処理の部分は全てここに入れます。
+参考実装として`/api/hello/route.ts`・`/components/HelloForm.tsx`を追加したので、詳しい仕組みはソースコードを読んでください。
 
 ## 注意
 
