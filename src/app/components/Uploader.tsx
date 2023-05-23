@@ -1,7 +1,7 @@
 "use client";
 
 import { FileUploader } from "react-drag-drop-files";
-import { useAppContext } from "@/context/store";
+import { useAppContext } from "@/app/context/store";
 
 export default function Upload() {
   const { file, setFile } = useAppContext();

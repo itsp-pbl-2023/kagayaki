@@ -2,8 +2,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
-import Counter from "@/components/Counter";
-import Upload from "@/components/Uploader";
+import Counter from "@/app/components/Counter";
+import Upload from "@/app/components/Uploader";
 
 export default function Home() {
   return (
