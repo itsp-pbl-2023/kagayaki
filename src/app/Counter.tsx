@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "./layout";
 
 export default function Counter() {
-  const [count, setCount] = useState(0);
+  const { count, setCount } = useContext(AppContext);
   const onClickHandler = () => {
     setCount(count + 1);
   };
