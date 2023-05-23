@@ -8,28 +8,29 @@ import {
   useState,
 } from "react";
 
-// Contextとして使用する値の型を定義
-interface ContextProps {
+// AppContextとして使用する値の型を定義
+interface AppContextProps {
   count: number;
   setCount: Dispatch<SetStateAction<number>>;
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
 }
 
-// Contextを作成
-const AppContext = createContext<ContextProps>({
+// AppContextを作成
+const AppContext = createContext<AppContextProps>({
   count: 0,
   setCount: (): number => 0,
   file: null,
   setFile: (): File | null => null,
 });
 
-// ContextをProviderでラップする
+// AppContextをProviderでラップする
 export const AppContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  // 初期値を設定
   const [count, setCount] = useState(0);
   const [file, setFile] = useState<File | null>(null);
   return (
@@ -39,4 +40,5 @@ export const AppContextProvider = ({
   );
 };
 
+// 各ページやコンポーネントでAppContextを使用するためのカスタムフック
 export const useAppContext = () => useContext(AppContext);
