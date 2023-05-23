@@ -1,10 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-
-type HelloRequest = NextRequest & {
-  name: string;
-};
-
-export async function GET(req: HelloRequest) {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const name = searchParams.get("name");
   /* 実際のAPIではこのような感じでデータを取得する
   const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
     headers: {
@@ -14,6 +10,8 @@ export async function GET(req: HelloRequest) {
   });
   const data = await res.json(); 
   */
-  const data = { message: `ようこそ！${req.name}さん！` };
-  return NextResponse.json(data);
+  const data = JSON.stringify({
+    message: `ようこそ！${name}さん！`,
+  });
+  return new Response(data);
 }
