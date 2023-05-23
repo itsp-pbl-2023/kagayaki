@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useContext } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import { AppContext } from "./layout";
+import { useAppContext } from "./context/store";
 
 export default function Upload() {
-  const { file, setFile } = useContext(AppContext);
+  const { file, setFile } = useAppContext();
   // typesは型がArrayなので配列で指定する
   const fileTypes = ["PDF"];
   const handleChange = (file: File) => {
