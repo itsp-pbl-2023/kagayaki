@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./page.module.scss";
+import styles from "./page.module.css";
 import Link from "next/link";
 import Counter from "./Counter";
 import Upload from "./Upload";
@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div>ようこそ！KAGAYAKIの大地へ。</div>
+      <div>ここはルートページです。</div>
       <div className={styles.image}>
         <Image
           src="/kagayaki.png"
