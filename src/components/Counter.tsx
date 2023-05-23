@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppContext } from "./context/store";
+import { useAppContext } from "@/context/store";
 
 export default function Counter() {
   const { count, setCount } = useAppContext();
