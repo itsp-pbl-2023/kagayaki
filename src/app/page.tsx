@@ -14,6 +14,7 @@ export default function Home() {
         <Upload />
       </div>
       <div>
+        {/* TODO: InfoCardの内容は後で差し替える */}
         <InfoCard />
         <InfoCard />
         <InfoCard />
