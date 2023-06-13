@@ -94,7 +94,7 @@ const PostNew = () => {
           console.log("whisper start");
 
           // Whisper API
-          const response = await fetch(`/test/api/whisper`, {
+          const response = await fetch(`/api/whisper/route`, {
             method: "POST",
             body: formData,
           });
