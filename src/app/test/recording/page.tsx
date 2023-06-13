@@ -82,6 +82,49 @@ const PostNew = () => {
     player.play();
   };
 
+  //データ送信
+  useEffect(() => {
+    const fn = async () => {
+      try {
+        if (audioFile) {
+          // 送信データ
+          const formData = new FormData();
+          formData.append("file", audioFile);
+
+          console.log("whisper start");
+
+          // Whisper API
+          const response = await fetch(`/test/api/whisper`, {
+            method: "POST",
+            body: formData,
+          });
+          const response_data = await response.json();
+
+          // 音声認識チェック
+          if (response_data.transcript) {
+            setTranscript(response_data.transcript);
+          }
+        }
+      } catch (error) {
+        alert(error);
+        setLoading(false);
+      }
+      setAudioFile(null);
+    };
+
+    fn();
+  }, [audioFile]);
+
+  //whisperからテキストが返ってきたとき
+  useEffect(() => {
+    if (transcript) {
+      // 送信
+      //文字起こし後の実装
+    } else {
+      setLoading(false);
+    }
+  }, [transcript]);
+
   return (
     <main className={styles.main}>
       <div>ここは録音のテストページです。</div>
@@ -115,6 +158,11 @@ const PostNew = () => {
           </div>
           <div>00:00</div>
         </div>
+      )}
+      {transcript ? (
+        <div>今日のお前の名言にゃ！『{transcript}』</div>
+      ) : (
+        <div>早く録音するにゃーん</div>
       )}
       <div className={styles.link}>
         <Link href="/">ルートページへ</Link>
