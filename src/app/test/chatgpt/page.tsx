@@ -1,19 +1,23 @@
+"use client";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import { Configuration, OpenAIApi } from "openai";
-
-// 発行したAPI Keyを使って設定を定義
-const configuration = new Configuration({
-  apiKey: process.env.API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+import { useState } from "react";
 
 async function handler() {
+  console.log(process.env);
+  const configuration = new Configuration({
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  });
+  console.log(configuration);
+  const openai = new OpenAIApi(configuration);
+  console.log("start");
   if (!configuration.apiKey) {
     // "OpenAI API key not configured, please follow instructions in README.md"
+    console.log("config読み込めてないよ");
     return;
   }
-
+  console.log("config読み込めてるよ");
   // GPTに送るメッセージを取得
   //   const message =
 
@@ -31,6 +35,8 @@ async function handler() {
       max_tokens: 100,
     });
     // GPTの返答を取得
+    console.log("動いてますよー");
+    console.log(completion.data.choices[0].message);
     return completion.data.choices[0].message;
   } catch (error: any) {
     // Consider adjusting the error handling logic for your use case
@@ -48,14 +54,23 @@ async function handler() {
   }
 }
 
-export default async function Home() {
-  const data: any = await handler();
-  console.log(data);
+export default function Home() {
+  // const data: any = await handler();
+  // 発行したAPI Keyを使って設定を定義
+  const [data, setData] = useState("");
+  const onClickHandler = async () => {
+    await handler().then((res: any) => {
+      console.log("API実行完了");
+      setData(res?.content);
+    });
+    return;
+  };
   return (
     <main className={styles.main}>
       <div>ここはChatGPT APIのテストページです。</div>
-      {data && <div>{data.content}</div>}
-
+      <button onClick={() => onClickHandler()}>ボタン</button>
+      {/* {data && <div>{data.content}</div>} */}
+      <div>{data}</div>
       <div className={styles.link}>
         <Link href="/">ルートページへ</Link>
       </div>
