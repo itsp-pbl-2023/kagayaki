@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,7 +17,10 @@
     "next": "13.4.1",
     "openai": "^3.2.1",
     "react": "18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
+    "react-drag-drop-files": "^2.3.10",
     "sass": "^1.62.1",
     "typescript": "5.0.4"
   }

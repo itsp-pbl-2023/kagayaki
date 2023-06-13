@@ -1,5 +1,5 @@
 "use client";
-import styles from "./page.module.scss";
+import styles from "./page.module.css";
 import Link from "next/link";
 import { Configuration, OpenAIApi } from "openai";
 import { useState } from "react";
