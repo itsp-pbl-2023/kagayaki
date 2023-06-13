@@ -1,4 +1,5 @@
 export async function GET(req: Request) {
+  // req.url = `/api/hello?name=${name}`
   const { searchParams } = new URL(req.url);
   const name = searchParams.get("name");
   /* 実際のAPIではこのような感じでデータを取得する
@@ -8,7 +9,7 @@ export async function GET(req: Request) {
       "API-Key": process.env.DATA_API_KEY,
     },
   });
-  const data = await res.json(); 
+  const data = await res.json();  
   */
   const data = JSON.stringify({
     message: `ようこそ！${name}さん！`,
