@@ -1,8 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
 
 export async function POST(req: Request) {
-  //   const { searchParams } = new URL(req.url);
-  //   const name = searchParams.get("name");
   console.log(process.env);
   const prompt = req.body;
   console.log(prompt);
@@ -43,14 +41,8 @@ export async function POST(req: Request) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
-      //   res.status(error.response.status).json(error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
-      //   res.status(500).json({
-      //     error: {
-      //       message: "An error occurred during your request.",
-      //     },
-      //   });
     }
   }
 }

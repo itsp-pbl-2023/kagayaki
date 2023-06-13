@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-  // const data: any = await handler();
   // 発行したAPI Keyを使って設定を定義
   const [data, setData] = useState("");
   const onClickHandler = async () => {
@@ -21,7 +20,6 @@ export default function Home() {
     <main className={styles.main}>
       <div>ここはChatGPT APIのテストページです。</div>
       <button onClick={() => onClickHandler()}>ボタン</button>
-      {/* {data && <div>{data.content}</div>} */}
       <div>{data}</div>
       <div className={styles.link}>
         <Link href="/">ルートページへ</Link>
