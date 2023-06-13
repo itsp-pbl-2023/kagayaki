@@ -9,7 +9,7 @@
   text-align: center;
   color: #e74c3c;
   text-decoration: none;
-  &:hover {
-    color: #c0392b;
-  }
+}
+.title:hover {
+  color: #c0392b;
 }
