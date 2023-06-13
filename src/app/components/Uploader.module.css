@@ -14,4 +14,7 @@
     font-size: 20px;
     color: #666;
   }
+  p {
+    display: none;
+  }
 }
