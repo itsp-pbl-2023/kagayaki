@@ -20,7 +20,11 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.10",
+    "react-pdf": "^7.1.2",
     "sass": "^1.62.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/react-pdf": "^7.0.0"
   }
 }

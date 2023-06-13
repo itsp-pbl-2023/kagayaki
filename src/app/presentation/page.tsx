@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import PdfView from "@/app/components/PdfViewer";
 
 export default function Home() {
   const [isStarted, setIsStarted] = useState(false);
@@ -25,6 +26,9 @@ export default function Home() {
       </div>
       <div className={styles.link}>
         <Link href="/">ルートページへ</Link>
+      </div>
+      <div>
+        <PdfView />
       </div>
       {isStarted && (
         <div>
