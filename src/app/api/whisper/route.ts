@@ -23,28 +23,34 @@ export const config = {
   },
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  try {
-    const fileContent: any = await new Promise((resolve, reject) => {
-      form.parse(req, async (err, _fields, files) => {
-        if (isFile(files.file)) {
-          resolve(fs.createReadStream(files.file.filepath));
-        }
+export async function POST(req: NextApiRequest) {
+  //try {
+  console.log("whisper start");
+  //console.log(req);
+  /*
+  const fileContent: any = await new Promise((resolve, reject) => {
+    form.parse(req, (err, _fields, files) => {
+      if (isFile(files.file)) {
+        resolve(fs.createReadStream(files.file.filepath));
+      }
 
-        return reject("file is not found");
-      });
+      return reject("file is not found");
     });
+  });*/
+  const { fileContent } = req.body.settingsObject;
 
-    // Whisper
-    const response = await openai.createTranscription(fileContent, "whisper-1");
-    const transcript = response.data.text;
+  // Whisper
+  const response = await openai.createTranscription(fileContent, "whisper-1");
+  const transcript = response.data.text;
 
-    res.status(200).json({ transcript });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Something went wrong");
-  }
+  console.log("piyo");
+
+  const data = JSON.stringify({
+    transcript: `${transcript}`,
+  });
+  return new Response(data);
+  //  } catch (error) {
+  //console.error(error);
+  //return reject("whisper error");
+  // }
 }

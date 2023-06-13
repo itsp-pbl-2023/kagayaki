@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -16,7 +16,7 @@
     "@types/react-dom": "18.2.4",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
-    "formidable": "^2.1.1",
+    "formidable": "^3.2.5",
     "mic-recorder-to-mp3": "^2.2.2",
     "next": "13.4.1",
     "openai": "^3.2.1",
@@ -24,8 +24,8 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
-    "react-timer-hook": "^3.0.6",
     "react-drag-drop-files": "^2.3.10",
+    "react-timer-hook": "^3.0.6",
     "sass": "^1.62.1",
     "typescript": "5.0.4"
   }

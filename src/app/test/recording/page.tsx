@@ -91,10 +91,10 @@ const PostNew = () => {
           const formData = new FormData();
           formData.append("file", audioFile);
 
-          console.log("whisper start");
+          console.log("whisper call");
 
           // Whisper API
-          const response = await fetch(`/api/whisper/route`, {
+          const response = await fetch(`/api/whisper/`, {
             method: "POST",
             body: formData,
           });
