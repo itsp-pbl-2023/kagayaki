@@ -12,6 +12,9 @@ export default function Home() {
       <div>
         <Link href="/test">テストページへ</Link>
       </div>
+      <div>
+        <Link href="/presentation">発表ページへ</Link>
+      </div>
     </main>
   );
 }
