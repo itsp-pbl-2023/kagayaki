@@ -1,7 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
-import type { NextApiRequest, NextApiResponse } from "next";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request) {
   //   const { searchParams } = new URL(req.url);
   //   const name = searchParams.get("name");
   console.log(process.env);
