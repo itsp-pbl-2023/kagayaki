@@ -22,9 +22,6 @@ export default function Home() {
         <InfoCard />
         <InfoCard />
       </div>
-      <div>
-        <Link href="/presentation">発表ページへ</Link>
-      </div>
     </main>
   );
 }
