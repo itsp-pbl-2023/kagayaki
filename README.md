@@ -14,6 +14,12 @@ docker compose run --rm sh -c "npm install"
 docker compose up
 ```
 
+`src/.env.local`に以下の記述が必要です。
+
+```
+NEXT_PUBLIC_API_KEY = {APIキーでここを置換}
+```
+
 ### 2 回目以降（起動のみ）
 
 ```
