@@ -27,7 +27,6 @@ export async function POST(req: Request) {
           content: "hello",
         },
       ],
-      temperature: 0.9,
       max_tokens: 100,
     });
     // GPTの返答を取得
