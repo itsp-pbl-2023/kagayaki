@@ -1,13 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  module: {
-    rules: [
-      {
-        test: /\.node$/,
-        loader: "node-loader",
-      },
-    ],
-  },
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
