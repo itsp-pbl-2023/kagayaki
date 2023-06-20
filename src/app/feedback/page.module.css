@@ -4,3 +4,13 @@
   font-size: 20px;
   text-align: center;
 }
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
