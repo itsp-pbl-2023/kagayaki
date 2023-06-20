@@ -1,9 +1,8 @@
 "use client";
 
 import { useAppContext } from "@/app/context/store";
-import React, { useState } from "react";
+import React from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
