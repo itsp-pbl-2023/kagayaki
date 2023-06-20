@@ -2,6 +2,7 @@
 
 import { FileUploader } from "react-drag-drop-files";
 import { useAppContext } from "@/app/context/store";
+import styles from "./Uploader.module.css";
 import { useRouter } from "next/navigation";
 
 export default function Uploader() {
@@ -15,7 +16,7 @@ export default function Uploader() {
   };
 
   return (
-    <div>
+    <div className={styles.uploader}>
       <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
       {/*選択ファイル名を表示させる*/}
       <p>{file !== null ? `ファイル名：${file["name"]}` : ""}</p>
