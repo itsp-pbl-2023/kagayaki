@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <Link className={styles.title} href="/">
-        KAGE打
+        KABE打
       </Link>
     </header>
   );
