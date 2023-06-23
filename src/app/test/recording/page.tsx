@@ -11,7 +11,6 @@ import Link from "next/link";
 import { KeyboardEvent, useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 //import { useSupabase } from '../supabase-provider'
-import { MicrophoneIcon, StopIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { useStopwatch } from "react-timer-hook";
 const MicRecorder = require("mic-recorder-to-mp3");
 
@@ -132,20 +131,20 @@ const PostNew = () => {
       {loading ? (
         <div>
           <div>
-            <StopIcon />
+            <button />
           </div>
           <div>
             <span>{("0" + minutes).slice(-2)}</span>:
             <span>{("0" + seconds).slice(-2)}</span>
           </div>
           <div>
-            <PlayIcon onClick={playAudio} />
+            <button onClick={playAudio} />
           </div>
         </div>
       ) : recording ? (
         <div>
           <div>
-            <StopIcon onClick={stopRecording} />
+            <button onClick={stopRecording} />
           </div>
           <div>
             <span>{("0" + minutes).slice(-2)}</span>:
@@ -155,7 +154,7 @@ const PostNew = () => {
       ) : (
         <div>
           <div>
-            <MicrophoneIcon onClick={startRecording} />
+            <button onClick={startRecording} />
           </div>
           <div>00:00</div>
         </div>
