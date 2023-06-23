@@ -78,7 +78,8 @@ const PostNew = () => {
   //音声再生
   const playAudio = async () => {
     //再生
-    const player = new Audio(URL.createObjectURL(audioFile as File));
+    const audioURL = URL.createObjectURL(audioFile as File);
+    const player = new Audio(audioURL);
     player.play();
   };
 
@@ -89,7 +90,7 @@ const PostNew = () => {
         if (audioFile) {
           // 送信データ
           const formData = new FormData();
-          formData.append("file", audioFile);
+          formData.append("file", audioFile as File);
 
           console.log("whisper call");
 

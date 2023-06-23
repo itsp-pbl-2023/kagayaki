@@ -10,13 +10,11 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
-    "@types/formidable": "^2.0.6",
     "@types/node": "20.1.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
-    "formidable": "^3.2.5",
     "mic-recorder-to-mp3": "^2.2.2",
     "next": "13.4.1",
     "openai": "^3.2.1",
