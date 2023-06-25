@@ -1,6 +1,15 @@
+.header {
+  height: 64px;
+  padding: 10px 20px;
+  box-shadow: 0 0 8px #ddd;
+}
 .title {
-  font-size: 1.5em;
+  font-size: 32px;
   font-weight: bold;
   text-align: center;
-  color: palevioletred;
+  color: #e74c3c;
+  text-decoration: none;
+}
+.title:hover {
+  color: #c0392b;
 }

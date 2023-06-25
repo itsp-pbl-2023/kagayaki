@@ -12,18 +12,27 @@
     "@types/node": "20.1.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "bootstrap-icons": "^1.10.5",
+    "canvas": "^2.11.2",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "mic-recorder-to-mp3": "^2.2.2",
     "next": "13.4.1",
+    "node-loader": "^2.0.0",
     "openai": "^3.2.1",
-    "react": "18.2.0",
+    "raw-loader": "^4.0.2",
+    "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.10",
     "react-timer-hook": "^3.0.6",
+    "react-pdf": "^7.1.2",
     "sass": "^1.62.1",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/react-pdf": "^7.0.0",
+    "pdfjs-dist": "^3.7.107"
   }
 }
