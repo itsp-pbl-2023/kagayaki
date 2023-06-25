@@ -1,20 +1,23 @@
 .card {
-  width: calc(50% - 20px);
+  width: calc(50% - 30px);
   height: 200px;
-  margin: 10px;
-  padding: 20px;
+  margin: 15px;
+  padding: 30px;
   border-radius: 5px;
   font-size: 20px;
   text-align: center;
   box-shadow: 0 0 8px #ddd;
-  .card_title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-  }
-  .card_content {
-    margin-top: 10px;
-    font-size: 16px;
-    text-align: left;
-  }
+}
+.card .card_title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.card .card_content {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+.card:hover {
+  box-shadow: 0 0 8px #aaa;
 }
