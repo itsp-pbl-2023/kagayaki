@@ -131,20 +131,20 @@ const PostNew = () => {
       {loading ? (
         <div>
           <div>
-            <button />
+            <button>ボタン</button>
           </div>
           <div>
             <span>{("0" + minutes).slice(-2)}</span>:
             <span>{("0" + seconds).slice(-2)}</span>
           </div>
           <div>
-            <button onClick={playAudio} />
+            <button onClick={playAudio}>再生</button>
           </div>
         </div>
       ) : recording ? (
         <div>
           <div>
-            <button onClick={stopRecording} />
+            <button onClick={stopRecording}>録音停止</button>
           </div>
           <div>
             <span>{("0" + minutes).slice(-2)}</span>:
@@ -154,7 +154,7 @@ const PostNew = () => {
       ) : (
         <div>
           <div>
-            <button onClick={startRecording} />
+            <button onClick={startRecording}>録音開始</button>
           </div>
           <div>00:00</div>
         </div>
