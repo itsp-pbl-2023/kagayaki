@@ -8,7 +8,7 @@ import { AppContextProvider } from "@/app/context/store";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "KAGAYAKI",
+  title: "KABE打",
   description: "プレゼンテーション練習を支援するアプリケーション",
 };
 

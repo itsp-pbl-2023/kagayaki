@@ -1,11 +1,11 @@
 "use client";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import FeedbackCard from "../components/FeedbackCard";
 import { useAppContext } from "../context/store";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const { feedbacks, setFeedbacks } = useAppContext();
+  const { setFeedbacks } = useAppContext();
   // chatgptからfetchでテキスト取得
   useEffect(() => {
     getFeedbacks();
