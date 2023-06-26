@@ -33,14 +33,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div>ここは発表ページです。</div>
-      <div className={styles.link}>
-        <Link href="/feedback">フィードバックページへ</Link>
-      </div>
-      <div className={styles.link}>
-        <Link href="/">ルートページへ</Link>
-      </div>
-      <div>
+      <div className={styles.slide_container}>
         <PdfView
           pageNum={pageNum}
           numPages={numPages}

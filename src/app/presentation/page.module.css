@@ -4,3 +4,9 @@
   font-size: 20px;
   text-align: center;
 }
+
+.slide_container {
+  width: 1000px;
+  max-width: calc(100% - 40px);
+  margin: 0 auto;
+}

@@ -5,6 +5,7 @@ import React from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import styles from "./PdfViewer.module.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -14,14 +15,13 @@ export default function PdfViewer(props: any) {
   return (
     <div>
       {file && (
-        <div>
-          <Document file={file} onLoadSuccess={props.onDocumentLoadSuccess}>
-            <Page pageNumber={props.pageNum} />
-          </Document>
-          <p>
-            Page {props.pageNum} of {props.numPages}
-          </p>
-        </div>
+        <Document
+          className={styles.pdf_document}
+          file={file}
+          onLoadSuccess={props.onDocumentLoadSuccess}
+        >
+          <Page className={styles.pdf_page} pageNumber={props.pageNum} />
+        </Document>
       )}
     </div>
   );
