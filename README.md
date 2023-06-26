@@ -10,7 +10,7 @@
 
 ```
 docker compose build
-docker compose run --rm sh -c "npm install"
+docker compose run --rm app sh -c "npm install"
 docker compose up
 ```
 
@@ -31,7 +31,7 @@ docker compose up
 `git merge origin main`、`git pull`などで新しいパッケージが必要となった際は、`npm install`を実行してください。開発時に`Module Not Found`となった場合は、これを行うと解決する可能性が高いです。
 
 ```
-docker compose run --rm sh -c "npm install"
+docker compose run --rm app sh -c "npm install"
 docker compose up
 ```
 
@@ -40,7 +40,7 @@ docker compose up
 新機能の実装の際に新しいパッケージが必要となった際は、`npm install`してください。`package.json`が更新されることで、`main`に merge された後に、他の開発者が pull した後、`npm install`で自動的に新しいパッケージもインストールできるようになります。
 
 ```
-docker compose run --rm sh -c "npm install <package名>"
+docker compose run --rm app sh -c "npm install <package名>"
 docker compose up
 ```
 
