@@ -3,26 +3,31 @@
 import PdfViewer from "@/app/components/PdfViewer";
 import styles from "./page.module.css";
 import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/app/context/store";
 
-export default function PageFeedback({ params }: { params: { pid: string } }) {
+export default function PageFeedback() {
   const [numPages, setNumPages] = useState(0);
+  const [pageNum, setPageNum] = useState(0);
   const { lapTime } = useAppContext();
-  const lapMinutes = Math.floor(lapTime[Number(params.pid) - 1] / 60000);
-  const lapSeconds = Math.floor(
-    (lapTime[Number(params.pid) - 1] % 60000) / 1000
-  );
+  const [lapMinutes, setLapMinutes] = useState(0);
+  const [lapSeconds, setLapSeconds] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
+
+  // ページが切り替わった際の処理
+  useEffect(() => {
+    setLapMinutes(Math.floor(lapTime[pageNum] / 60000));
+    setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
+  }, [lapTime, pageNum]);
 
   return (
     <main className={styles.main_container}>
       <div className={styles.top_container}>
         <div className={styles.page_text}>
-          {params.pid}&nbsp;/&nbsp;{numPages}&nbsp;ページ
+          {pageNum + 1}&nbsp;/&nbsp;{numPages}&nbsp;ページ
         </div>
         <h1 className={styles.title}>個別フィードバック</h1>
         <Link className={styles.link_button} href="/feedback">
@@ -30,20 +35,24 @@ export default function PageFeedback({ params }: { params: { pid: string } }) {
         </Link>
       </div>
       <div className={styles.slide_container}>
-        <Link
+        <button
           className={styles.left_button}
-          href={`/feedback/${Math.max(1, Number(params.pid) - 1)}`}
+          onClick={() => {
+            setPageNum((pageNum + numPages - 1) % numPages);
+          }}
         />
         <div className={styles.pdf_container}>
           <PdfViewer
-            pageNum={Number(params.pid)}
+            pageNum={pageNum + 1}
             numPages={numPages}
             onDocumentLoadSuccess={onDocumentLoadSuccess}
           />
         </div>
-        <Link
+        <button
           className={styles.right_button}
-          href={`/feedback/${Math.min(numPages, Number(params.pid) + 1)}`}
+          onClick={() => {
+            setPageNum((pageNum + 1) % numPages);
+          }}
         />
       </div>
       <div className={styles.feedback_container}>

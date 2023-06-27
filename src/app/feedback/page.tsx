@@ -28,8 +28,9 @@ export default function Home() {
     */
     const data = {
       explanation:
-        "説明はわかりやすかったです。もう少し詳しく説明するとより良いと思います。",
-      logic: "極めて論理的で、わかりやすい説明でした。",
+        "説明はわかりやすかったです。もう少し詳しく説明するとより良いと思います。説明はわかりやすかったです。もう少し詳しく説明するとより良いと思います。説明はわかりやすかったです。もう少し詳しく説明するとより良いと思います。",
+      logic:
+        "極めて論理的で、わかりやすい説明でした。極めて論理的で、わかりやすい説明でした。極めて論理的で、わかりやすい説明でした。",
       informativeness: "情報量は十分でした。",
       fluency: "流暢な説明でした。",
     };
@@ -39,14 +40,14 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.top_container}>
         <h1 className={styles.title}>全体フィードバック</h1>
-        <Link className={styles.link_button} href="/feedback/1">
+        <Link className={styles.link_button} href="/feedback/detail">
           個別フィードバックへ
         </Link>
       </div>
       <div className={styles.time_container}>
         <div className={styles.amount_time}>
           <div className={styles.amount_time_text}>合計時間</div>
-          <div className={styles.amount_time_text}>
+          <div className={styles.amount_time_text_time}>
             <i className="bi bi-clock-fill" />
             &nbsp;{amountMinutes < 10 ? "0" + amountMinutes : amountMinutes}:
             {amountSeconds < 10 ? "0" + amountSeconds : amountSeconds}
