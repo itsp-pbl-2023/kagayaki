@@ -1,8 +1,10 @@
 "use client";
+
 import { useEffect } from "react";
 import FeedbackCard from "../components/FeedbackCard";
 import { useAppContext } from "../context/store";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   const { lapTime, setFeedbacks } = useAppContext();
@@ -35,7 +37,12 @@ export default function Home() {
   };
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>フィードバック</h1>
+      <div className={styles.top_container}>
+        <h1 className={styles.title}>フィードバック</h1>
+        <Link className={styles.link_button} href="/feedback/1">
+          個別フィードバックへ
+        </Link>
+      </div>
       <div className={styles.time_container}>
         <div className={styles.amount_time}>
           <div className={styles.amount_time_text}>合計時間</div>
