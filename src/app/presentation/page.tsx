@@ -15,13 +15,11 @@ export default function Home() {
   const [timerMinute, setTimerMinute] = useState(0);
   const [timerSecond, setTimerSecond] = useState(0);
   const { lapTime, setLapTime } = useAppContext();
-  const [startTime, setStartTime] = useState(0);
   const [lastTime, setLastTime] = useState(0);
 
   const startButton = () => {
     setIsStarted(true);
     // 経過時間を表示する
-    setStartTime(Date.now());
     setLastTime(Date.now());
     const tmp = Date.now();
     setLapTime([]);

@@ -14,7 +14,7 @@
   width: 100%;
   height: 100%;
 }
-canvas {
+.pdf_page canvas {
   display: flex;
   justify-content: center;
   align-items: center;
