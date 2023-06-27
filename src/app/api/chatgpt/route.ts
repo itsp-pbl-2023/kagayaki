@@ -2,8 +2,11 @@ import { Configuration, OpenAIApi } from "openai";
 
 export async function POST(req: Request) {
   console.log(process.env);
-  const prompt = req.body;
+  const prompt = await new Response(req.body).text();
   console.log(prompt);
+  const format = `
+  出力形式は以下のような形式に沿ってください。{"logic": "{ここに論理性の良さについて返答を記入}", "explanation": "{ここに内容の説明の良さと悪さについて返答を記入}"}`;
+
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
   });
@@ -24,13 +27,18 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "user",
-          content: "hello",
+          content: prompt,
+        },
+        {
+          role: "user",
+          content: format,
         },
       ],
-      max_tokens: 100,
+      max_tokens: 1000,
     });
     // GPTの返答を取得
     console.log("動いてますよー");
+
     console.log(completion.data.choices[0].message);
     const data = JSON.stringify({
       message: completion.data.choices[0].message?.content,
