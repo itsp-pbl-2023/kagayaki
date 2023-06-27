@@ -98,9 +98,6 @@ export default function Home() {
           </button>
         )}
       </div>
-      {lapTime.map((time, index) => (
-        <div key={index}>{time}</div>
-      ))}
     </main>
   );
 }

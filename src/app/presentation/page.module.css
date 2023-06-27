@@ -18,7 +18,7 @@
 }
 
 .page_text {
-  width: 160px;
+  width: 180px;
 }
 
 .status_text {
@@ -28,8 +28,8 @@
   width: 180px;
   font-size: 24px;
   text-align: center;
-  margin-left: calc(50% - 120px / 2 - 185px);
-  margin-right: calc(50% - 120px / 2 - 205px);
+  margin-left: calc(50% - 120px / 2 - 200px);
+  margin-right: calc(50% - 120px / 2 - 210px);
 }
 
 .on_recording {
