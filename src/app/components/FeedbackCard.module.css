@@ -12,11 +12,13 @@
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+  width: 100%;
 }
 .card .card_content {
   margin-top: 10px;
   font-size: 16px;
   text-align: left;
+  width: 100%;
 }
 .card:hover {
   box-shadow: 0 0 8px #aaa;

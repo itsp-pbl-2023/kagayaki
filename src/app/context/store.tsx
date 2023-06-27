@@ -21,6 +21,8 @@ interface AppContextProps {
   setCount: Dispatch<SetStateAction<number>>;
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
+  lapTime: number[];
+  setLapTime: Dispatch<SetStateAction<number[]>>;
   feedbacks: FeedbackTypes;
   setFeedbacks: Dispatch<SetStateAction<FeedbackTypes>>;
 }
@@ -31,6 +33,8 @@ const AppContext = createContext<AppContextProps>({
   setCount: (): number => 0,
   file: null,
   setFile: (): File | null => null,
+  lapTime: [],
+  setLapTime: (): number[] => [],
   feedbacks: {
     explanation: "",
     logic: "",
@@ -54,6 +58,7 @@ export const AppContextProvider = ({
   // 初期値を設定
   const [count, setCount] = useState(0);
   const [file, setFile] = useState<File | null>(null);
+  const [lapTime, setLapTime] = useState<number[]>([]);
   const [feedbacks, setFeedbacks] = useState<FeedbackTypes>({
     explanation: "",
     logic: "",
@@ -62,7 +67,16 @@ export const AppContextProvider = ({
   });
   return (
     <AppContext.Provider
-      value={{ count, setCount, file, setFile, feedbacks, setFeedbacks }}
+      value={{
+        count,
+        setCount,
+        file,
+        setFile,
+        lapTime,
+        setLapTime,
+        feedbacks,
+        setFeedbacks,
+      }}
     >
       {children}
     </AppContext.Provider>

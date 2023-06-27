@@ -1,5 +1,6 @@
 .uploader {
   display: flex;
+  width: 100%;
 }
 .uploader label {
   min-width: calc(100% - 80px);
