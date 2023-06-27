@@ -12,17 +12,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 export default function PdfViewer(props: any) {
   const { file } = useAppContext();
 
-  return (
-    <div>
-      {file && (
-        <Document
-          className={styles.pdf_document}
-          file={file}
-          onLoadSuccess={props.onDocumentLoadSuccess}
-        >
-          <Page className={styles.pdf_page} pageNumber={props.pageNum} />
-        </Document>
-      )}
-    </div>
-  );
+  if (!file) {
+    return <div>ファイルが読み込まれていません</div>;
+  } else {
+    return (
+      <Document
+        className={styles.pdf_document}
+        file={file}
+        onLoadSuccess={props.onDocumentLoadSuccess}
+      >
+        <Page className={styles.pdf_page} pageNumber={props.pageNum} />
+      </Document>
+    );
+  }
 }

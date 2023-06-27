@@ -12,7 +12,6 @@ body {
 div {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   animation-name: fadeInAnime;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
