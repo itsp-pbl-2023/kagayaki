@@ -3,6 +3,7 @@
   padding: 10px 20px;
   box-shadow: 0 0 8px #ddd;
 }
+
 .title {
   font-size: 32px;
   font-weight: bold;
@@ -10,6 +11,7 @@
   color: #e74c3c;
   text-decoration: none;
 }
+
 .title:hover {
   color: #c0392b;
 }

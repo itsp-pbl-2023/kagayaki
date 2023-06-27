@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.top_container}>
-        <h1 className={styles.title}>フィードバック</h1>
+        <h1 className={styles.title}>全体フィードバック</h1>
         <Link className={styles.link_button} href="/feedback/1">
           個別フィードバックへ
         </Link>

@@ -17,6 +17,7 @@
 .card .card_content {
   margin-top: 10px;
   font-size: 16px;
+  line-height: 200%;
   text-align: left;
   width: 100%;
 }
