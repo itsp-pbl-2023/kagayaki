@@ -10,7 +10,7 @@ import { useAppContext } from "@/app/context/store";
 export default function PageFeedback() {
   const [numPages, setNumPages] = useState(0);
   const [pageNum, setPageNum] = useState(0);
-  const { lapTime } = useAppContext();
+  const { lapTime, transcript } = useAppContext();
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
@@ -73,9 +73,7 @@ export default function PageFeedback() {
         </div>
         <div className={styles.script_text}>
           {/* TODO: 将来的には、実際のスクリプトに置き換える　*/}
-          このスライドについて説明します。まず、このスライドでは、スライドの構成について説明します。次に、スライドの構成について説明します。最後に、スライドの構成について説明します。このスライドについて説明します。まず、このスライドでは、スライドの構成について説明します。次に、スライドの構成について説明します。最後に、スライドの構成について説明します。
-          このスライドについて説明します。まず、このスライドでは、スライドの構成について説明します。次に、スライドの構成について説明します。最後に、スライドの構成について説明します。
-          このスライドについて説明します。まず、このスライドでは、スライドの構成について説明します。次に、スライドの構成について説明します。最後に、スライドの構成について説明します。
+          {transcript[pageNum]}
         </div>
       </div>
     </main>

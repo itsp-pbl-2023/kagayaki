@@ -16,15 +16,13 @@ export default function Home() {
   const [numPages, setNumPages] = useState(0);
   const [timerMinute, setTimerMinute] = useState(0);
   const [timerSecond, setTimerSecond] = useState(0);
-  // const { audioFile, setAudioFile } = useAppContext();
-  const { lapTime, setLapTime } = useAppContext();
   const [lastTime, setLastTime] = useState(0);
   const [formData, setFormData] = useState();
-
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [recording, setRecording] = useState(false);
-  const { transcript, setTranscript } = useAppContext();
+  const { lapTime, setLapTime, transcript, setTranscript, setFeedbacks } =
+    useAppContext();
   const [status, setStatus] = useState(0);
 
   const recorder = useRef<typeof MicRecorder>(null);
@@ -79,12 +77,14 @@ export default function Home() {
       }
     }
     console.log(fullText);
+    // 非同期処理が完了してレスポンスが取得できたら、data["content"]をfeedbacksに格納
     const res = await fetch(`/api/chatgpt/`, {
       method: "POST",
       body: fullText,
     });
     const data = await res.json();
-    console.log(data);
+    console.log(JSON.parse(data["message"]));
+    setFeedbacks(JSON.parse(data["message"]));
   };
 
   const startRecording = async () => {

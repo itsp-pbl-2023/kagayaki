@@ -5,7 +5,7 @@ export async function POST(req: Request) {
   const prompt = await new Response(req.body).text();
   console.log(prompt);
   const format = `
-  出力形式は以下のような形式に沿ってください。{"logic": "{ここに論理性の良さについて返答を記入}", "explanation": "{ここに内容の説明の良さと悪さについて返答を記入}"}`;
+  ### 指示 ###\n以下に入力するプレゼンテーションに対する良い点・悪い点をレビューしてください。出力は以下のJSON形式に沿ってください。\n\n### 出力形式 ###\n{"logic": "{ここに論理性の良さと悪さについて返答を記入}", "explanation": "{ここに内容の説明の良さと悪さについて返答を記入}, "informativeness": "{ここに情報量の良さと悪さについて返答を記入}", "fluency": "{ここに口調の良さと悪さについて返答を記入}"}\n\n### 入力 ###\n`;
 
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -22,19 +22,16 @@ export async function POST(req: Request) {
 
   try {
     // 設定を諸々のせてAPIとやり取り
+    console.log(format + prompt);
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          content: prompt,
-        },
-        {
-          role: "user",
-          content: format,
+          content: format + prompt,
         },
       ],
-      max_tokens: 1000,
+      max_tokens: 5000,
     });
     // GPTの返答を取得
     console.log("動いてますよー");
