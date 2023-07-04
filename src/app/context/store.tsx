@@ -21,6 +21,8 @@ interface AppContextProps {
   setCount: Dispatch<SetStateAction<number>>;
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
+  transcript: string[];
+  setTranscript: Dispatch<SetStateAction<string[]>>;
   lapTime: number[];
   setLapTime: Dispatch<SetStateAction<number[]>>;
   feedbacks: FeedbackTypes;
@@ -33,6 +35,8 @@ const AppContext = createContext<AppContextProps>({
   setCount: (): number => 0,
   file: null,
   setFile: (): File | null => null,
+  transcript: [],
+  setTranscript: (): string[] => [],
   lapTime: [],
   setLapTime: (): number[] => [],
   feedbacks: {
@@ -59,6 +63,7 @@ export const AppContextProvider = ({
   const [count, setCount] = useState(0);
   const [file, setFile] = useState<File | null>(null);
   const [lapTime, setLapTime] = useState<number[]>([]);
+  const [transcript, setTranscript] = useState<string[]>([]);
   const [feedbacks, setFeedbacks] = useState<FeedbackTypes>({
     explanation: "",
     logic: "",
@@ -74,6 +79,8 @@ export const AppContextProvider = ({
         setFile,
         lapTime,
         setLapTime,
+        transcript,
+        setTranscript,
         feedbacks,
         setFeedbacks,
       }}
