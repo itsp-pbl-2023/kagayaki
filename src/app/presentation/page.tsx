@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import PdfView from "@/app/components/PdfViewer";
+import Loading from "../components/Loading";
 import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import { useAppContext } from "../context/store";
 
@@ -17,10 +18,7 @@ export default function Home() {
   const [timerMinute, setTimerMinute] = useState(0);
   const [timerSecond, setTimerSecond] = useState(0);
   const [lastTime, setLastTime] = useState(0);
-  const [formData, setFormData] = useState();
   const [file, setFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [recording, setRecording] = useState(false);
   const { lapTime, setLapTime, transcript, setTranscript, setFeedbacks } =
     useAppContext();
   const [status, setStatus] = useState(0);
@@ -46,12 +44,12 @@ export default function Home() {
         method: "POST",
         body: formData,
       });
-      const response_data = await response.json().then((response_data) => {
+      await response.json().then((response_data) => {
         console.log(response_data.transcript);
-        setTranscript([...transcript, response_data.transcript]);
         if (status == 1) {
           setStatus(2);
         }
+        setTranscript([...transcript, response_data.transcript]);
       });
     };
     fn();
@@ -89,14 +87,9 @@ export default function Home() {
 
   const startRecording = async () => {
     // 録音開始
-    await recorder.current
-      .start()
-      .then(() => {
-        setRecording(true);
-      })
-      .catch((error: string) => {
-        console.error(error);
-      });
+    await recorder.current.start().catch((error: string) => {
+      console.error(error);
+    });
   };
 
   // 音声録音停止
@@ -114,19 +107,11 @@ export default function Home() {
         });
         // console.log(file);
         // 録音停止
-        setLoading(true);
         setFile(file);
-        // console.log("ここはストップの中ですよ");
       })
-      .then()
       .catch((error: string) => {
         console.log(error);
-        setLoading(false);
       });
-    // Whisper API
-    // 録音停止
-    setRecording(false);
-    // setText([...text, "hello"]);
   };
 
   const startButton = () => {
@@ -170,6 +155,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      {status === 2 && <Loading />}
       <div className={styles.nav_container}>
         <div className={styles.page_text}>
           ページ&nbsp;
