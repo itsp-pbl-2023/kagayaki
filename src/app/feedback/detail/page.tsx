@@ -50,6 +50,7 @@ export default function PageFeedback() {
           className={styles.left_button}
           onClick={() => {
             setPageNum((pageNum + numPages - 1) % numPages);
+            displayFeedback();
           }}
         />
         <div className={styles.pdf_container}>
@@ -62,8 +63,8 @@ export default function PageFeedback() {
         <button
           className={styles.right_button}
           onClick={() => {
-            displayFeedback();
             setPageNum((pageNum + 1) % numPages);
+            displayFeedback();
           }}
         />
       </div>
@@ -76,7 +77,7 @@ export default function PageFeedback() {
         </div>
         <div className={styles.feedback_text}>
           {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}
-          {"フィードバックはここに表示されます"}
+          {feedback}
         </div>
       </div>
       <div className={styles.script_container}>
