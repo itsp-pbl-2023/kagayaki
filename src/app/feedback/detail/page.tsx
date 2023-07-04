@@ -13,6 +13,7 @@ export default function PageFeedback() {
   const { lapTime, transcript } = useAppContext();
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
+  const [feedback, setFeedback] = useState("");
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -22,6 +23,16 @@ export default function PageFeedback() {
     setLapMinutes(Math.floor(lapTime[pageNum] / 60000));
     setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
   }, [lapTime, pageNum]);
+
+  const displayFeedback = async () => {
+    const res = await fetch(`/api/chatgpt/`, {
+      method: "POST_page",
+      body: transcript[pageNum],
+    });
+    const data = await res.json();
+    console.log(JSON.parse(data["message"]));
+    setFeedback(JSON.parse(data["message"]));
+  };
 
   return (
     <main className={styles.main_container}>
@@ -51,6 +62,7 @@ export default function PageFeedback() {
         <button
           className={styles.right_button}
           onClick={() => {
+            displayFeedback();
             setPageNum((pageNum + 1) % numPages);
           }}
         />
@@ -64,7 +76,7 @@ export default function PageFeedback() {
         </div>
         <div className={styles.feedback_text}>
           {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}
-          大変よくできていました。もう少し詳しく説明するとより良いと思います。また、説明の順番を変えるとよりわかりやすいと思います。さらに、説明の前に目次を入れるとより良いと思います。大変よくできていました。もう少し詳しく説明するとより良いと思います。また、説明の順番を変えるとよりわかりやすいと思います。
+          {"フィードバックはここに表示されます"}
         </div>
       </div>
       <div className={styles.script_container}>
