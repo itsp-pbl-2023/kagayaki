@@ -1,0 +1,152 @@
+.main_container {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.top_container {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.page_text {
+  position: absolute;
+  left: 60px;
+}
+
+.link_button {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #e74c3c;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.link_button:hover {
+  color: #fff;
+  background-color: #c0392b;
+}
+
+.slide_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.pdf_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.left_button,
+.right_button {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  z-index: 3;
+  background: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.left_button {
+  margin: auto 40px auto 0;
+  border-width: 20px 30px 20px 0;
+  border-color: transparent #e74c3c transparent transparent;
+}
+
+.left_button:hover {
+  border-color: transparent #c0392b transparent transparent;
+}
+
+.right_button {
+  margin: auto 0 auto 40px;
+  border-width: 20px 0 20px 30px;
+  border-color: transparent transparent transparent #e74c3c;
+}
+
+.right_button:hover {
+  border-color: transparent transparent transparent #c0392b;
+}
+
+.feedback_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.time_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  font-size: 32px;
+}
+
+.feedback_text {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 16px;
+  line-height: 200%;
+  border-left: 1px solid #ccc;
+  text-align: left;
+  padding: 10px 40px 10px 20px;
+  width: 70%;
+}
+
+.script_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background: #f5f5f5;
+}
+
+.script_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  font-size: 48px;
+}
+
+.script_text {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 16px;
+  line-height: 200%;
+  text-align: left;
+  padding: 0 20px;
+  width: calc(100% - 100px);
+}
