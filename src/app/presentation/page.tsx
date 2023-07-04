@@ -10,6 +10,8 @@ import { useAppContext } from "../context/store";
 const MicRecorder = require("mic-recorder-to-mp3");
 
 export default function Home() {
+  const format = `### 指示 ###\n以下に入力するプレゼンテーションに対する良い点・悪い点をレビューしてください。出力は以下のJSON形式に沿ってください。\n\n### 出力形式 ###\n{"logic": "{ここに論理性の良さと悪さについて返答を記入}", "explanation": "{ここに内容の説明の良さと悪さについて返答を記入}, "informativeness": "{ここに情報量の良さと悪さについて返答を記入}", "fluency": "{ここに口調の良さと悪さについて返答を記入}"}\n\n### 出力例 ###\n'{"logic": "論理性は高いです。富士山が日本で一番でかい山であり、エベレストが2番目に大きい山という事実に基づいています。また、私が富士山よりもエベレストの方が好きだという主観的な意見も述べられていますが、それについての理由が明確には述べられていません。", "explanation": "内容の説明は中程度です。富士山とエベレストがそれぞれ日本と世界で有名な山であるという事実は述べられていますが、富士山とエベレストの特徴や魅力、なぜエベレストの方が好きなのかについての詳細な説明がないため、内容の充実度はあまり高くないです。", "informativeness": "情報量は低いです。富士山とエベレストがそれぞれ日本で一番でかい山と2番目に大きい山であるという情報は伝えられていますが、それ以外の詳細な情報や裏付けるデータなどは提供されていません。", "fluency": "流暢性は高いです。簡潔な文章でまとまっており、明瞭に意見が表現されています。"}'\n\n### 入力 ###\n`;
+
   const [isStarted, setIsStarted] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const router = useRouter();
@@ -80,7 +82,7 @@ export default function Home() {
     // 非同期処理が完了してレスポンスが取得できたら、data["content"]をfeedbacksに格納
     const res = await fetch(`/api/chatgpt/`, {
       method: "POST",
-      body: fullText,
+      body: format + fullText,
     });
     const data = await res.json();
     console.log(JSON.parse(data["message"]));

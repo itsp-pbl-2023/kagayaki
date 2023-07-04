@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useAppContext } from "@/app/context/store";
 
 export default function PageFeedback() {
+  const format = `以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。また、文字数は150字以内としてください。\n\n### 入力 ###\n`;
+
   const [numPages, setNumPages] = useState(0);
   const [pageNum, setPageNum] = useState(0);
   const { lapTime, transcript } = useAppContext();
@@ -26,8 +28,8 @@ export default function PageFeedback() {
 
   const displayFeedback = async () => {
     const res = await fetch(`/api/chatgpt/`, {
-      method: "POST_page",
-      body: transcript[pageNum],
+      method: "POST",
+      body: format + transcript[pageNum],
     });
     const data = await res.json();
     console.log(JSON.parse(data["message"]));

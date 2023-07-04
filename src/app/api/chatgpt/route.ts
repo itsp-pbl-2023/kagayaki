@@ -1,16 +1,6 @@
 import { Configuration, OpenAIApi } from "openai";
 
 export async function POST(req: Request) {
-  const format = `### 指示 ###\n以下に入力するプレゼンテーションに対する良い点・悪い点をレビューしてください。出力は以下のJSON形式に沿ってください。\n\n### 出力形式 ###\n{"logic": "{ここに論理性の良さと悪さについて返答を記入}", "explanation": "{ここに内容の説明の良さと悪さについて返答を記入}, "informativeness": "{ここに情報量の良さと悪さについて返答を記入}", "fluency": "{ここに口調の良さと悪さについて返答を記入}"}\n\n### 出力例 ###\n'{"logic": "論理性は高いです。富士山が日本で一番でかい山であり、エベレストが2番目に大きい山という事実に基づいています。また、私が富士山よりもエベレストの方が好きだという主観的な意見も述べられていますが、それについての理由が明確には述べられていません。", "explanation": "内容の説明は中程度です。富士山とエベレストがそれぞれ日本と世界で有名な山であるという事実は述べられていますが、富士山とエベレストの特徴や魅力、なぜエベレストの方が好きなのかについての詳細な説明がないため、内容の充実度はあまり高くないです。", "informativeness": "情報量は低いです。富士山とエベレストがそれぞれ日本で一番でかい山と2番目に大きい山であるという情報は伝えられていますが、それ以外の詳細な情報や裏付けるデータなどは提供されていません。", "fluency": "流暢性は高いです。簡潔な文章でまとまっており、明瞭に意見が表現されています。"}'\n\n### 入力 ###\n`;
-  POST_base(req, format);
-}
-
-export async function POST_page(req: Request) {
-  const format = `以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。また、文字数は150字以内としてください。`;
-  POST_base(req, format);
-}
-
-export async function POST_base(req: Request, format: String) {
   console.log(process.env);
   const prompt = await new Response(req.body).text();
   console.log(prompt);
@@ -30,13 +20,13 @@ export async function POST_base(req: Request, format: String) {
 
   try {
     // 設定を諸々のせてAPIとやり取り
-    console.log(format + prompt);
+    console.log(prompt);
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          content: format + prompt,
+          content: prompt,
         },
       ],
       max_tokens: 2000,
