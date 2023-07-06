@@ -30,7 +30,6 @@ export async function POST(req: Request) {
           content: format + prompt,
         },
       ],
-      max_tokens: 2000,
     });
     // GPTの返答を取得
     console.log("動いてますよー");
