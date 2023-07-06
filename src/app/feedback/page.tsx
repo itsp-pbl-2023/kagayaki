@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 
 export default function Home() {
-  const { lapTime, transcript } = useAppContext();
+  const { lapTime, transcript, feedbacks } = useAppContext();
   const amountMinutes = Math.floor(lapTime.reduce((a, b) => a + b, 0) / 60000);
   const amountSeconds = Math.floor(
     (lapTime.reduce((a, b) => a + b, 0) % 60000) / 1000
@@ -55,6 +55,28 @@ export default function Home() {
         <FeedbackCard title="論理性" item="logic" />
         <FeedbackCard title="情報量" item="informativeness" />
         <FeedbackCard title="流暢性" item="fluency" />
+      </div>
+      <div className={styles.questions_container}>
+        <div className={styles.questions_title}>想定される質問集</div>
+        {feedbacks["questions"] && Array.isArray(feedbacks["questions"]) ? (
+          feedbacks["questions"].map((feedback, index) => (
+            <div className={styles.question_card} key={index}>
+              <div className={styles.question_card_icon}>
+                <i className="bi bi-patch-question-fill" />
+              </div>
+              <div className={styles.question_card_text}>&nbsp;{feedback}</div>
+            </div>
+          ))
+        ) : (
+          <div className={styles.question_card}>
+            <div className={styles.question_card_icon}>
+              <i className="bi bi-patch-question-fill" />
+            </div>
+            <div className={styles.question_card_text}>
+              &nbsp;特に質問はありません。
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

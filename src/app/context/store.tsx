@@ -13,6 +13,7 @@ type FeedbackTypes = {
   logic: string;
   informativeness: string;
   fluency: string;
+  questions: string[];
 };
 
 // AppContextとして使用する値の型を定義
@@ -44,12 +45,14 @@ const AppContext = createContext<AppContextProps>({
     logic: "",
     informativeness: "",
     fluency: "",
+    questions: [],
   },
   setFeedbacks: (): FeedbackTypes => ({
     explanation: "",
     logic: "",
     informativeness: "",
     fluency: "",
+    questions: [],
   }),
 });
 
@@ -69,6 +72,7 @@ export const AppContextProvider = ({
     logic: "",
     informativeness: "",
     fluency: "",
+    questions: [],
   });
   return (
     <AppContext.Provider
