@@ -14,13 +14,21 @@ export default function Home() {
         <Upload />
       </div>
       <div>
-        {/* TODO: InfoCardの内容は後で差し替える */}
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
+        <InfoCard
+          title="AIによるフィードバック"
+          description="AIによる的確なフィードバックを受けることで、発表の質を向上させることができます。発表全体に対する項目別のフィードバックに加えて、スライドのページ毎のフィードバックも受けることができます。"
+          image="/info_1.jpg"
+        />
+        <InfoCard
+          title="発表音声を文字起こしで確認"
+          description="AIが自動で文字起こしを行ったスクリプトは、発表後にページごとに確認することができます。時間に対する発話速度も数値化され、発表速度の改善に役立てることができます。"
+          image="/info_2.jpg"
+        />
+        <InfoCard
+          title="AIによる想定質問の生成"
+          description="発表した内容に対してAIが複数の想定質問を生成します。自分では気が付かなかったプレゼン内容の不足点や注目点を発見することにより、発表後の質疑応答にも備えることができます。"
+          image="/info_3.jpg"
+        />
       </div>
     </main>
   );
