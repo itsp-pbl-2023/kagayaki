@@ -1,12 +1,24 @@
 import styles from "./InfoCard.module.css";
+import Image from "next/image";
 
-export default function InfoCard() {
+type PropTypes = {
+  title: string;
+  description: string;
+  image: string;
+};
+
+export default function InfoCard(props: PropTypes) {
   return (
     <div className={styles.info_card}>
-      <h2 className={styles.info_card_title}>AIによるフィードバック</h2>
-      <p className={styles.info_card_description}>
-        AIによる的確なフィードバックを受けることで、発表の質を向上させることができます。
-      </p>
+      <Image
+        className={styles.info_card_image}
+        src={props.image}
+        alt="InfoCard Image"
+        width={600}
+        height={360}
+      />
+      <h2 className={styles.info_card_title}>{props.title}</h2>
+      <p className={styles.info_card_description}>{props.description}</p>
     </div>
   );
 }

@@ -1,28 +1,35 @@
 .info_card {
   width: calc(100% / 3 - 20px);
-  height: 100%;
   box-shadow: 0 0 8px #ddd;
   border-radius: 5px;
-  padding: 20px;
   margin: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .info_card:hover {
   box-shadow: 0 0 8px #aaa;
 }
 
+.info_card .info_card_image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 20px;
+}
+
 .info_card .info_card_title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-decoration: none;
+  margin: 0 auto;
 }
 
 .info_card .info_card_description {
-  font-size: 18px;
+  font-size: 16px;
   color: #666;
+  margin: 20px;
+  height: 150px;
 }
