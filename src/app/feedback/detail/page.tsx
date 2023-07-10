@@ -6,6 +6,7 @@ import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/app/context/store";
+import { calStringPerMinute, valSpeed } from "@/app/feedback/page";
 
 export default function PageFeedback() {
   const [numPages, setNumPages] = useState(0);
@@ -13,6 +14,8 @@ export default function PageFeedback() {
   const { lapTime, transcript } = useAppContext();
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
+  const [speed, setSpeed] = useState(0);
+  const [stringPerMinute, setStringPerMinute] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -21,7 +24,13 @@ export default function PageFeedback() {
   useEffect(() => {
     setLapMinutes(Math.floor(lapTime[pageNum] / 60000));
     setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
-  }, [lapTime, pageNum]);
+
+    setStringPerMinute(
+      calStringPerMinute(transcript[pageNum], lapTime[pageNum])
+    );
+    const speed = valSpeed(stringPerMinute);
+    setSpeed(speed);
+  }, [lapTime, transcript, pageNum, stringPerMinute]);
 
   return (
     <main className={styles.main_container}>
@@ -61,6 +70,33 @@ export default function PageFeedback() {
           &nbsp;
           {lapMinutes < 10 ? "0" + lapMinutes : lapMinutes}:
           {lapSeconds < 10 ? "0" + lapSeconds : lapSeconds}
+        </div>
+        <div
+          className={
+            styles.amount_speed_text_time +
+            " " +
+            (speed == 0
+              ? styles.green
+              : speed == -1 || speed == 1
+              ? styles.orange
+              : styles.red)
+          }
+        >
+          <div>
+            <i className="bi bi-alarm-fill" />
+            &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/分
+          </div>
+          <div>
+            {speed == 0
+              ? "完璧です"
+              : speed == -1
+              ? "少し遅いです"
+              : speed == 1
+              ? "少し早いです"
+              : speed == -2
+              ? "非常に遅いです"
+              : "非常に早いです"}
+          </div>
         </div>
         <div className={styles.feedback_text}>
           {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}

@@ -150,3 +150,15 @@
   padding: 0 20px;
   width: calc(100% - 100px);
 }
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.green {
+  color: lightseagreen;
+}
