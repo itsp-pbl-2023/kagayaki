@@ -38,31 +38,31 @@ export default function Home() {
         </div>
         <div className={styles.amount_speed}>
           <div className={styles.amount_speed_text}>発音スピード</div>
-          <div
-            className={
-              styles.amount_speed_text_time +
-              " " +
-              (totalSpeed == 0
-                ? styles.green
-                : totalSpeed == -1 || totalSpeed == 1
-                ? styles.orange
-                : styles.red)
-            }
-          >
+          <div className={styles.amount_speed_text_time}>
             <div>
               <i className="bi bi-alarm-fill" />
               &nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分
             </div>
-            <div>
+            <div
+              className={
+                styles.amount_speed_text_description +
+                " " +
+                (totalSpeed == 0
+                  ? styles.green
+                  : totalSpeed == -1 || totalSpeed == 1
+                  ? styles.orange
+                  : styles.red)
+              }
+            >
               {totalSpeed == 0
-                ? "完璧です"
+                ? "適切な速さ"
                 : totalSpeed == -1
-                ? "少し遅いです"
+                ? "少し遅い"
                 : totalSpeed == 1
-                ? "少し早いです"
+                ? "少し早い"
                 : totalSpeed == -2
-                ? "非常に遅いです"
-                : "非常に早いです"}
+                ? "非常に遅い"
+                : "非常に早い"}
             </div>
           </div>
         </div>
@@ -82,25 +82,24 @@ export default function Home() {
                 {seconds < 10 ? "0" + seconds : seconds}
                 <div
                   className={
-                    speed == 0
+                    styles.lap_speed_text_description +
+                    " " +
+                    (speed == 0
                       ? styles.green
                       : speed == -1 || speed == 1
                       ? styles.orange
-                      : styles.red
+                      : styles.red)
                   }
                 >
-                  &nbsp;
-                  <i className="bi bi-alarm-fill" />
-                  &nbsp;
                   {speed == 0
-                    ? "完璧です"
+                    ? "適切な速さ"
                     : speed == -1
-                    ? "少し遅いです"
+                    ? "少し遅い"
                     : speed == 1
-                    ? "少し早いです"
+                    ? "少し早い"
                     : speed == -2
-                    ? "非常に遅いです"
-                    : "非常に早いです"}
+                    ? "非常に遅い"
+                    : "非常に早い"}
                 </div>
               </div>
             );

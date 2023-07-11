@@ -63,14 +63,15 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font-size: 32px;
+  font-size: 24px;
 }
 
 .amount_time_text_time {
   display: flex;
   justify-content: center;
   width: 100%;
-  font-size: 64px;
+  font-size: 48px;
+  height: 60px;
 }
 
 .amount_speed {
@@ -84,7 +85,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  font-size: 32px;
+  font-size: 24px;
 }
 
 .amount_speed_text_time {
@@ -92,18 +93,28 @@
   justify-content: center;
   width: 100%;
   font-size: 32px;
+  height: 60px;
+}
+
+.amount_speed_text_description {
+  display: flex;
+  justify-content: center;
+  padding: 2px 20px;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px;
 }
 
 .red {
-  color: red;
+  background-color: red;
 }
 
 .orange {
-  color: orange;
+  background-color: orange;
 }
 
 .green {
-  color: lightseagreen;
+  background-color: lightseagreen;
 }
 
 .lap_time {
@@ -122,15 +133,25 @@
 
 .lap_time_text {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  width: 100%;
+  width: 350px;
   font-size: 20px;
   margin: 5px 0;
 }
 
 .lap_time_divide_border {
   margin: 0 10px;
+}
+
+.lap_speed_text_description {
+  display: flex;
+  justify-content: center;
+  padding: 2px 20px;
+  margin-left: 20px;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px;
 }
 
 .feedback_container {

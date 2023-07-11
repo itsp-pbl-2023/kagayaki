@@ -110,7 +110,25 @@
 }
 
 .speed_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
+}
+
+.speed_text_time {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.speed_text_description {
+  display: flex;
+  justify-content: center;
+  padding: 2px 20px;
+  font-size: 16px;
+  color: white;
+  border-radius: 5px;
 }
 
 .feedback_text {
@@ -156,13 +174,13 @@
 }
 
 .red {
-  color: red;
+  background-color: red;
 }
 
 .orange {
-  color: orange;
+  background-color: orange;
 }
 
 .green {
-  color: lightseagreen;
+  background-color: lightseagreen;
 }
