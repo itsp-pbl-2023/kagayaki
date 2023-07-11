@@ -5,14 +5,10 @@ export const calcStringPerMinute = (text: string, time: number) => {
 };
 
 export const valSpeed = (sizePerMinute: number) => {
-  console.log("number:");
-  console.log(sizePerMinute);
   const bestStringSize = 300;
   const goodRate: number = 0.2;
   const badRate = 0.5;
   const speed = (sizePerMinute - bestStringSize) / bestStringSize;
-  console.log("speed:");
-  console.log(speed);
   if (-goodRate < speed && speed < goodRate) {
     return 0;
   }

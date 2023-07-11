@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import FeedbackCard from "../components/FeedbackCard";
 import { useAppContext } from "../context/store";
 import styles from "./page.module.css";
@@ -20,11 +19,6 @@ export default function Home() {
 
   const totalSpeed = valSpeed(totalStringPerMinute);
 
-  // chatgptからfetchでテキスト取得
-  useEffect(() => {
-    console.log(transcript);
-  }, []);
-
   return (
     <main className={styles.main}>
       <div className={styles.top_container}>
@@ -44,31 +38,29 @@ export default function Home() {
         </div>
         <div className={styles.amount_speed}>
           <div className={styles.amount_speed_text}>発音スピード</div>
-          <div
-            className={
-              styles.amount_speed_text_time +
-              " " +
-              (totalSpeed == 0
-                ? styles.green
-                : totalSpeed == -1 || totalSpeed == 1
-                ? styles.orange
-                : styles.red)
-            }
-          >
-            <div>
-              <i className="bi bi-alarm-fill" />
-              &nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分
-            </div>
-            <div>
+          <div className={styles.amount_speed_text_time}>
+            <i className="bi bi-alarm-fill" />
+            <div>&nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/min</div>
+            <div
+              className={
+                styles.amount_speed_text_description +
+                " " +
+                (totalSpeed == 0
+                  ? styles.green
+                  : totalSpeed == -1 || totalSpeed == 1
+                  ? styles.orange
+                  : styles.red)
+              }
+            >
               {totalSpeed == 0
-                ? "完璧です"
+                ? "適切な速さ"
                 : totalSpeed == -1
-                ? "少し遅いです"
+                ? "少し遅い"
                 : totalSpeed == 1
-                ? "少し早いです"
+                ? "少し早い"
                 : totalSpeed == -2
-                ? "非常に遅いです"
-                : "非常に早いです"}
+                ? "非常に遅い"
+                : "非常に早い"}
             </div>
           </div>
         </div>
@@ -81,32 +73,32 @@ export default function Home() {
             const speed = valSpeed(stringPerMinute);
             return (
               <div key={index} className={styles.lap_time_text}>
-                {index + 1}ページ目
-                <div className={styles.lap_time_divide_border} />
-                <i className="bi bi-clock-fill" />
-                &nbsp;{minutes < 10 ? "0" + minutes : minutes}:
-                {seconds < 10 ? "0" + seconds : seconds}
+                <div>{index + 1}ページ目</div>
+                <div>
+                  <i className="bi bi-clock-fill" />
+                  &nbsp;{minutes < 10 ? "0" + minutes : minutes}:
+                  {seconds < 10 ? "0" + seconds : seconds}
+                </div>
                 <div
                   className={
-                    speed == 0
+                    styles.lap_speed_text_description +
+                    " " +
+                    (speed == 0
                       ? styles.green
                       : speed == -1 || speed == 1
                       ? styles.orange
-                      : styles.red
+                      : styles.red)
                   }
                 >
-                  &nbsp;
-                  <i className="bi bi-alarm-fill" />
-                  &nbsp;
                   {speed == 0
-                    ? "完璧です"
+                    ? "適切な速さ"
                     : speed == -1
-                    ? "少し遅いです"
+                    ? "少し遅い"
                     : speed == 1
-                    ? "少し早いです"
+                    ? "少し早い"
                     : speed == -2
-                    ? "非常に遅いです"
-                    : "非常に早いです"}
+                    ? "非常に遅い"
+                    : "非常に早い"}
                 </div>
               </div>
             );
@@ -121,25 +113,18 @@ export default function Home() {
       </div>
       <div className={styles.questions_container}>
         <div className={styles.questions_title}>想定される質問集</div>
-        {feedbacks["questions"] && Array.isArray(feedbacks["questions"]) ? (
-          feedbacks["questions"].map((feedback, index) => (
-            <div className={styles.question_card} key={index}>
-              <div className={styles.question_card_icon}>
-                <i className="bi bi-patch-question-fill" />
-              </div>
-              <div className={styles.question_card_text}>&nbsp;{feedback}</div>
-            </div>
-          ))
-        ) : (
-          <div className={styles.question_card}>
+        {[
+          feedbacks["question_1"],
+          feedbacks["question_2"],
+          feedbacks["question_3"],
+        ].map((feedback, index) => (
+          <div className={styles.question_card} key={index}>
             <div className={styles.question_card_icon}>
               <i className="bi bi-patch-question-fill" />
             </div>
-            <div className={styles.question_card_text}>
-              &nbsp;特に質問はありません。
-            </div>
+            <div className={styles.question_card_text}>&nbsp;{feedback}</div>
           </div>
-        )}
+        ))}
       </div>
     </main>
   );

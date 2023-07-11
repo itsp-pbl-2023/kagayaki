@@ -37,7 +37,6 @@ export default function Home() {
       if (!file) {
         return;
       }
-      console.log("whisper call");
       const formData = new FormData();
       formData.append("file", file);
       const response = await fetch(`/api/whisper/`, {
@@ -45,11 +44,13 @@ export default function Home() {
         body: formData,
       });
       await response.json().then((response_data) => {
-        console.log(response_data.transcript);
         if (status == 1) {
           setStatus(2);
         }
-        setTranscript([...transcript, response_data.transcript]);
+        setTranscript([
+          ...transcript,
+          response_data.transcript || "（読み上げ無し）",
+        ]);
       });
     };
     fn();
@@ -74,15 +75,16 @@ export default function Home() {
         fullText += "\n" + transcript[i];
       }
     }
-    console.log(fullText);
-    // 非同期処理が完了してレスポンスが取得できたら、data["content"]をfeedbacksに格納
-    const res = await fetch(`/api/chatgpt/`, {
-      method: "POST",
-      body: fullText,
-    });
-    const data = await res.json();
-    console.log(JSON.parse(data["message"]));
-    setFeedbacks(JSON.parse(data["message"]));
+    try {
+      const res = await fetch(`/api/chatgpt/`, {
+        method: "POST",
+        body: fullText,
+      });
+      const data = res.json();
+      setFeedbacks(await data);
+    } catch {
+      console.log("APIの呼び出しに失敗しました。");
+    }
   };
 
   const startRecording = async () => {
@@ -105,12 +107,8 @@ export default function Home() {
           type: blob.type,
           lastModified: Date.now(),
         });
-        // console.log(file);
         // 録音停止
         setFile(file);
-      })
-      .catch((error: string) => {
-        console.log(error);
       });
   };
 
@@ -145,8 +143,6 @@ export default function Home() {
     setLapTime([...lapTime, elapsedTime]);
     setStatus(1);
     stopRecording();
-
-    console.log(transcript);
   };
 
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
@@ -192,11 +188,27 @@ export default function Home() {
             スタート
           </button>
         ) : pageNum < numPages ? (
-          <button className={styles.button_next} onClick={() => nextButton()}>
+          <button
+            className={
+              styles.button_next +
+              (transcript.length + 1 !== pageNum
+                ? " " + styles.disabled_button
+                : "")
+            }
+            onClick={() => nextButton()}
+          >
             次のページへ
           </button>
         ) : (
-          <button className={styles.button_stop} onClick={() => stopButton()}>
+          <button
+            className={
+              styles.button_stop +
+              (transcript.length + 1 !== pageNum
+                ? " " + styles.disabled_button
+                : "")
+            }
+            onClick={() => stopButton()}
+          >
             終了
           </button>
         )}
