@@ -7,12 +7,10 @@ export default function Home() {
   // 発行したAPI Keyを使って設定を定義
   const [data, setData] = useState("");
   const onClickHandler = async () => {
-    console.log("クリックされました");
     const res = await fetch(`/api/chatgpt/`, {
       method: "POST",
       body: "hello",
     });
-    console.log("API実行完了");
     const data = await res.json();
     setData(data.message);
   };

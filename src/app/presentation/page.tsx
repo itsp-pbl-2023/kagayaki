@@ -37,7 +37,6 @@ export default function Home() {
       if (!file) {
         return;
       }
-      console.log("whisper call");
       const formData = new FormData();
       formData.append("file", file);
       const response = await fetch(`/api/whisper/`, {
@@ -45,7 +44,6 @@ export default function Home() {
         body: formData,
       });
       await response.json().then((response_data) => {
-        console.log(response_data.transcript);
         if (status == 1) {
           setStatus(2);
         }
@@ -81,7 +79,6 @@ export default function Home() {
       body: fullText,
     });
     const data = await res.json();
-    console.log(JSON.parse(data["message"]));
     setFeedbacks(JSON.parse(data["message"]));
   };
 
@@ -105,12 +102,8 @@ export default function Home() {
           type: blob.type,
           lastModified: Date.now(),
         });
-        // console.log(file);
         // 録音停止
         setFile(file);
-      })
-      .catch((error: string) => {
-        console.log(error);
       });
   };
 
@@ -145,8 +138,6 @@ export default function Home() {
     setLapTime([...lapTime, elapsedTime]);
     setStatus(1);
     stopRecording();
-
-    console.log(transcript);
   };
 
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {

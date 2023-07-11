@@ -66,7 +66,6 @@ const PostNew = () => {
         setAudioFile(file);
       })
       .catch((error: string) => {
-        console.log(error);
         setLoading(false);
       });
 
@@ -90,8 +89,6 @@ const PostNew = () => {
           // 送信データ
           const formData = new FormData();
           formData.append("file", audioFile as File);
-
-          console.log("whisper call");
 
           // Whisper API
           const response = await fetch(`/api/whisper/`, {
