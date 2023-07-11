@@ -70,32 +70,32 @@ export default function PageFeedback() {
           &nbsp;
           {lapMinutes < 10 ? "0" + lapMinutes : lapMinutes}:
           {lapSeconds < 10 ? "0" + lapSeconds : lapSeconds}
-        </div>
-        <div
-          className={
-            styles.amount_speed_text_time +
-            " " +
-            (speed == 0
-              ? styles.green
-              : speed == -1 || speed == 1
-              ? styles.orange
-              : styles.red)
-          }
-        >
-          <div>
-            <i className="bi bi-alarm-fill" />
-            &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/分
-          </div>
-          <div>
-            {speed == 0
-              ? "完璧です"
-              : speed == -1
-              ? "少し遅いです"
-              : speed == 1
-              ? "少し早いです"
-              : speed == -2
-              ? "非常に遅いです"
-              : "非常に早いです"}
+          <div
+            className={
+              styles.speed_text +
+              " " +
+              (speed == 0
+                ? styles.green
+                : speed == -1 || speed == 1
+                ? styles.orange
+                : styles.red)
+            }
+          >
+            <div>
+              <i className="bi bi-alarm-fill" />
+              &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/分
+            </div>
+            <div>
+              {speed == 0
+                ? "完璧です"
+                : speed == -1
+                ? "少し遅いです"
+                : speed == 1
+                ? "少し早いです"
+                : speed == -2
+                ? "非常に遅いです"
+                : "非常に早いです"}
+            </div>
           </div>
         </div>
         <div className={styles.feedback_text}>
