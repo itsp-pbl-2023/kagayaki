@@ -11,6 +11,7 @@ export default function Home() {
   const amountSeconds = Math.floor(
     (lapTime.reduce((a, b) => a + b, 0) % 60000) / 1000
   );
+  console.log(transcript);
 
   const totalStringPerMinute = calcStringPerMinute(
     transcript.reduce((a, b) => a + b, ""),
@@ -39,10 +40,8 @@ export default function Home() {
         <div className={styles.amount_speed}>
           <div className={styles.amount_speed_text}>発音スピード</div>
           <div className={styles.amount_speed_text_time}>
-            <div>
-              <i className="bi bi-alarm-fill" />
-              &nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分
-            </div>
+            <i className="bi bi-alarm-fill" />
+            <div>&nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分</div>
             <div
               className={
                 styles.amount_speed_text_description +

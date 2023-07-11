@@ -47,7 +47,7 @@ export default function Home() {
         if (status == 1) {
           setStatus(2);
         }
-        setTranscript([...transcript, response_data.transcript]);
+        setTranscript([...transcript, response_data.transcript || ""]);
       });
     };
     fn();

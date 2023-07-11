@@ -8,23 +8,18 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 
-import { KeyboardEvent, useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
-//import { useSupabase } from '../supabase-provider'
+import { useState, useRef, useEffect } from "react";
 import { useStopwatch } from "react-timer-hook";
 const MicRecorder = require("mic-recorder-to-mp3");
 
 // 新規投稿
 const PostNew = () => {
-  //const { supabase } = useSupabase();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [prompt, setPrompt] = useState("");
   const [transcript, setTranscript] = useState("");
   const recorder = useRef<typeof MicRecorder>(null);
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [recording, setRecording] = useState(false);
-  const { seconds, minutes, start, pause, reset } = useStopwatch({
+  const { seconds, minutes, pause, reset } = useStopwatch({
     autoStart: false,
   });
 
