@@ -6,9 +6,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 
 export const calStringPerMinute = (text: string, time: number) => {
-  //const minutes = lapTime.reduce((a, b) => a + b, 0) / 60000;
   const minutes = time / 60000;
-  //const stringSize = transcript.reduce((a, b) => a + b, "").length;
   const stringSize = text.length;
   return stringSize / minutes;
 };
