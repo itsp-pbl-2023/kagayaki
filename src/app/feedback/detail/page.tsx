@@ -6,7 +6,7 @@ import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/app/context/store";
-import { calStringPerMinute, valSpeed } from "@/app/feedback/page";
+import { calcStringPerMinute, valSpeed } from "@/app/feedback/functions";
 
 export default function PageFeedback() {
   const [numPages, setNumPages] = useState(0);
@@ -26,7 +26,7 @@ export default function PageFeedback() {
     setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
 
     setStringPerMinute(
-      calStringPerMinute(transcript[pageNum], lapTime[pageNum])
+      calcStringPerMinute(transcript[pageNum], lapTime[pageNum])
     );
     const speed = valSpeed(stringPerMinute);
     setSpeed(speed);

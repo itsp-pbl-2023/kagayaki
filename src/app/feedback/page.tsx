@@ -4,36 +4,7 @@ import FeedbackCard from "../components/FeedbackCard";
 import { useAppContext } from "../context/store";
 import styles from "./page.module.css";
 import Link from "next/link";
-
-export const calStringPerMinute = (text: string, time: number) => {
-  const minutes = time / 60000;
-  const stringSize = text.length;
-  return stringSize / minutes;
-};
-
-export const valSpeed = (sizePerMinute: number) => {
-  console.log("number:");
-  console.log(sizePerMinute);
-  const bestStringSize = 300;
-  const goodRate: number = 0.2;
-  const badRate = 0.5;
-  const speed = (sizePerMinute - bestStringSize) / bestStringSize;
-  console.log("speed:");
-  console.log(speed);
-  if (-goodRate < speed && speed < goodRate) {
-    return 0;
-  }
-  if (-badRate < speed && speed < -goodRate) {
-    return -1;
-  }
-  if (goodRate < speed && speed < badRate) {
-    return 1;
-  }
-  if (speed < -badRate) {
-    return -2;
-  }
-  return 2;
-};
+import { calcStringPerMinute, valSpeed } from "@/app/feedback/functions";
 
 export default function Home() {
   const { lapTime, transcript, feedbacks } = useAppContext();
@@ -42,7 +13,7 @@ export default function Home() {
     (lapTime.reduce((a, b) => a + b, 0) % 60000) / 1000
   );
 
-  const totalStringPerMinute = calStringPerMinute(
+  const totalStringPerMinute = calcStringPerMinute(
     transcript.reduce((a, b) => a + b, ""),
     lapTime.reduce((a, b) => a + b, 0)
   );
@@ -106,7 +77,7 @@ export default function Home() {
             const minutes = Math.floor(time / 60000);
             const seconds = Math.floor((time % 60000) / 1000);
             const text = transcript[index];
-            const stringPerMinute = calStringPerMinute(text, time);
+            const stringPerMinute = calcStringPerMinute(text, time);
             const speed = valSpeed(stringPerMinute);
             return (
               <div key={index} className={styles.lap_time_text}>
