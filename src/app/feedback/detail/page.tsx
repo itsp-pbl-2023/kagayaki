@@ -24,7 +24,7 @@ const testPresentations = [
 ];
 
 export default function PageFeedback() {
-  const format = `### 指示 ###\n以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。また、文字数は150字以内としてください。\n\n### 入力 ###\n`;
+  const format = `### 指示 ###\n以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。\n\n### 入力 ###\n`;
   const [pageFeedbacks, setPageFeedbacks] = useState<string[]>([]);
 
   const [numPages, setNumPages] = useState(0);
@@ -55,17 +55,20 @@ export default function PageFeedback() {
   }, [status]);
 
   const getFeedBacks = async () => {
-    console.log("testPresentations.length = " + testPresentations.length);
     for (var i in testPresentations) {
       const res = await fetch(`/api/chatgpt/`, {
         method: "POST",
         //body: format + transcript[pageNum],
         body: format + testPresentations[i],
       });
-      const data = await res.json();
-      console.log(i + "番目のフィードバックです");
-      console.log(data["message"]);
-      setPageFeedbacks([...pageFeedbacks, data["message"]]);
+      const data = await res.json().then((response_data) => {
+        console.log(i + "番目のフィードバックです");
+        console.log(response_data["message"]);
+        setPageFeedbacks([...pageFeedbacks, response_data["message"]]);
+      });
+    }
+    for (var i in testPresentations) {
+      console.log(pageFeedbacks[i]);
     }
   };
 
