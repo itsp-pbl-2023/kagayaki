@@ -24,14 +24,15 @@ const testPresentations = [
 ];
 
 export default function PageFeedback() {
-  const format = `### 指示 ###\n以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。また、文字数は150字以内としてください。\n\n### 出力例 ###\n富士山について詳細な説明がされています。ただし、世界で一番高い山であるという情報は誤りです。\n\n### 入力 ###\n`;
+  const format = `### 指示 ###\n以下に入力するのはプレゼンテーションの一部分です。良い点・悪い点をレビューしてください。方針として、論理性、内容の説明、情報量、口調のそれぞれの良し悪しを意識してください。また、文字数は150字以内としてください。\n\n### 入力 ###\n`;
+  const [pageFeedbacks, setPageFeedbacks] = useState<string[]>([]);
 
   const [numPages, setNumPages] = useState(0);
   const [pageNum, setPageNum] = useState(0);
   const { lapTime, transcript } = useAppContext();
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
-  const [feedback, setFeedback] = useState("");
+  const [status, setStatus] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -42,15 +43,30 @@ export default function PageFeedback() {
     setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
   }, [lapTime, pageNum]);
 
-  const displayFeedback = async () => {
-    const res = await fetch(`/api/chatgpt/`, {
-      method: "POST",
-      //body: format + transcript[pageNum],
-      body: format + testPresentations[pageNum],
-    });
-    const data = await res.json();
-    console.log(JSON.parse(data["message"]));
-    setFeedback(JSON.parse(data["message"]));
+  useEffect(() => {
+    setStatus(1);
+  }, []);
+
+  useEffect(() => {
+    if (status === 1) {
+      getFeedBacks();
+      setStatus(2);
+    }
+  }, [status]);
+
+  const getFeedBacks = async () => {
+    console.log("testPresentations.length = " + testPresentations.length);
+    for (var i in testPresentations) {
+      const res = await fetch(`/api/chatgpt/`, {
+        method: "POST",
+        //body: format + transcript[pageNum],
+        body: format + testPresentations[i],
+      });
+      const data = await res.json();
+      console.log(i + "番目のフィードバックです");
+      console.log(data["message"]);
+      setPageFeedbacks([...pageFeedbacks, data["message"]]);
+    }
   };
 
   return (
@@ -69,7 +85,6 @@ export default function PageFeedback() {
           className={styles.left_button}
           onClick={() => {
             setPageNum((pageNum + numPages - 1) % numPages);
-            displayFeedback();
           }}
         />
         <div className={styles.pdf_container}>
@@ -83,7 +98,6 @@ export default function PageFeedback() {
           className={styles.right_button}
           onClick={() => {
             setPageNum((pageNum + 1) % numPages);
-            displayFeedback();
           }}
         />
       </div>
@@ -96,7 +110,7 @@ export default function PageFeedback() {
         </div>
         <div className={styles.feedback_text}>
           {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}
-          {feedback}
+          {pageFeedbacks[pageNum]}
         </div>
       </div>
       <div className={styles.script_container}>
