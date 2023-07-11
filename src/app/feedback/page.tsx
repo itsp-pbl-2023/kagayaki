@@ -11,7 +11,6 @@ export default function Home() {
   const amountSeconds = Math.floor(
     (lapTime.reduce((a, b) => a + b, 0) % 60000) / 1000
   );
-  console.log(transcript);
 
   const totalStringPerMinute = calcStringPerMinute(
     transcript.reduce((a, b) => a + b, ""),

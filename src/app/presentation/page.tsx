@@ -72,14 +72,16 @@ export default function Home() {
         fullText += "\n" + transcript[i];
       }
     }
-    console.log(fullText);
-    // 非同期処理が完了してレスポンスが取得できたら、data["content"]をfeedbacksに格納
-    const res = await fetch(`/api/chatgpt/`, {
-      method: "POST",
-      body: fullText,
-    });
-    const data = await res.json();
-    setFeedbacks(JSON.parse(data["message"]));
+    try {
+      const res = await fetch(`/api/chatgpt/`, {
+        method: "POST",
+        body: fullText,
+      });
+      const data = res.json();
+      setFeedbacks(await data);
+    } catch {
+      console.log("APIの呼び出しに失敗しました。");
+    }
   };
 
   const startRecording = async () => {
