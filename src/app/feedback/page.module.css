@@ -56,7 +56,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 25%;
 }
 
 .amount_time_text {
@@ -71,6 +71,39 @@
   justify-content: center;
   width: 100%;
   font-size: 64px;
+}
+
+.amount_speed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+
+.amount_speed_text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 32px;
+}
+
+.amount_speed_text_time {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 32px;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.green {
+  color: lightseagreen;
 }
 
 .lap_time {

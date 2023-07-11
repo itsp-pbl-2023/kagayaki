@@ -4,6 +4,7 @@ import FeedbackCard from "../components/FeedbackCard";
 import { useAppContext } from "../context/store";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { calcStringPerMinute, valSpeed } from "@/app/feedback/functions";
 
 export default function Home() {
   const { lapTime, transcript, feedbacks } = useAppContext();
@@ -11,6 +12,13 @@ export default function Home() {
   const amountSeconds = Math.floor(
     (lapTime.reduce((a, b) => a + b, 0) % 60000) / 1000
   );
+
+  const totalStringPerMinute = calcStringPerMinute(
+    transcript.reduce((a, b) => a + b, ""),
+    lapTime.reduce((a, b) => a + b, 0)
+  );
+
+  const totalSpeed = valSpeed(totalStringPerMinute);
 
   // chatgptからfetchでテキスト取得
   useEffect(() => {
@@ -34,10 +42,43 @@ export default function Home() {
             {amountSeconds < 10 ? "0" + amountSeconds : amountSeconds}
           </div>
         </div>
+        <div className={styles.amount_speed}>
+          <div className={styles.amount_speed_text}>発音スピード</div>
+          <div
+            className={
+              styles.amount_speed_text_time +
+              " " +
+              (totalSpeed == 0
+                ? styles.green
+                : totalSpeed == -1 || totalSpeed == 1
+                ? styles.orange
+                : styles.red)
+            }
+          >
+            <div>
+              <i className="bi bi-alarm-fill" />
+              &nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分
+            </div>
+            <div>
+              {totalSpeed == 0
+                ? "完璧です"
+                : totalSpeed == -1
+                ? "少し遅いです"
+                : totalSpeed == 1
+                ? "少し早いです"
+                : totalSpeed == -2
+                ? "非常に遅いです"
+                : "非常に早いです"}
+            </div>
+          </div>
+        </div>
         <div className={styles.lap_time}>
           {lapTime.map((time, index) => {
             const minutes = Math.floor(time / 60000);
             const seconds = Math.floor((time % 60000) / 1000);
+            const text = transcript[index];
+            const stringPerMinute = calcStringPerMinute(text, time);
+            const speed = valSpeed(stringPerMinute);
             return (
               <div key={index} className={styles.lap_time_text}>
                 {index + 1}ページ目
@@ -45,6 +86,28 @@ export default function Home() {
                 <i className="bi bi-clock-fill" />
                 &nbsp;{minutes < 10 ? "0" + minutes : minutes}:
                 {seconds < 10 ? "0" + seconds : seconds}
+                <div
+                  className={
+                    speed == 0
+                      ? styles.green
+                      : speed == -1 || speed == 1
+                      ? styles.orange
+                      : styles.red
+                  }
+                >
+                  &nbsp;
+                  <i className="bi bi-alarm-fill" />
+                  &nbsp;
+                  {speed == 0
+                    ? "完璧です"
+                    : speed == -1
+                    ? "少し遅いです"
+                    : speed == 1
+                    ? "少し早いです"
+                    : speed == -2
+                    ? "非常に遅いです"
+                    : "非常に早いです"}
+                </div>
               </div>
             );
           })}
