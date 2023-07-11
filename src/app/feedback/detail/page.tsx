@@ -107,10 +107,7 @@ export default function PageFeedback() {
         <div className={styles.script_icon}>
           <i className="bi bi-chat-left-text-fill" />
         </div>
-        <div className={styles.script_text}>
-          {/* TODO: 将来的には、実際のスクリプトに置き換える　*/}
-          {transcript[pageNum]}
-        </div>
+        <div className={styles.script_text}>{transcript[pageNum]}</div>
       </div>
     </main>
   );
