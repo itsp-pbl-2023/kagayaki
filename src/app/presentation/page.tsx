@@ -47,7 +47,10 @@ export default function Home() {
         if (status == 1) {
           setStatus(2);
         }
-        setTranscript([...transcript, response_data.transcript || ""]);
+        setTranscript([
+          ...transcript,
+          response_data.transcript || "（読み上げ無し）",
+        ]);
       });
     };
     fn();
@@ -185,11 +188,27 @@ export default function Home() {
             スタート
           </button>
         ) : pageNum < numPages ? (
-          <button className={styles.button_next} onClick={() => nextButton()}>
+          <button
+            className={
+              styles.button_next +
+              (transcript.length + 1 !== pageNum
+                ? " " + styles.disabled_button
+                : "")
+            }
+            onClick={() => nextButton()}
+          >
             次のページへ
           </button>
         ) : (
-          <button className={styles.button_stop} onClick={() => stopButton()}>
+          <button
+            className={
+              styles.button_stop +
+              (transcript.length + 1 !== pageNum
+                ? " " + styles.disabled_button
+                : "")
+            }
+            onClick={() => stopButton()}
+          >
             終了
           </button>
         )}
