@@ -121,25 +121,18 @@ export default function Home() {
       </div>
       <div className={styles.questions_container}>
         <div className={styles.questions_title}>想定される質問集</div>
-        {feedbacks["questions"] && Array.isArray(feedbacks["questions"]) ? (
-          feedbacks["questions"].map((feedback, index) => (
-            <div className={styles.question_card} key={index}>
-              <div className={styles.question_card_icon}>
-                <i className="bi bi-patch-question-fill" />
-              </div>
-              <div className={styles.question_card_text}>&nbsp;{feedback}</div>
-            </div>
-          ))
-        ) : (
-          <div className={styles.question_card}>
+        {[
+          feedbacks["question_1"],
+          feedbacks["question_2"],
+          feedbacks["question_3"],
+        ].map((feedback, index) => (
+          <div className={styles.question_card} key={index}>
             <div className={styles.question_card_icon}>
               <i className="bi bi-patch-question-fill" />
             </div>
-            <div className={styles.question_card_text}>
-              &nbsp;特に質問はありません。
-            </div>
+            <div className={styles.question_card_text}>&nbsp;{feedback}</div>
           </div>
-        )}
+        ))}
       </div>
     </main>
   );
