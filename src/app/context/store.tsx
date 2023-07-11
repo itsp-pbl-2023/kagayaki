@@ -20,8 +20,6 @@ type FeedbackTypes = {
 
 // AppContextとして使用する値の型を定義
 interface AppContextProps {
-  count: number;
-  setCount: Dispatch<SetStateAction<number>>;
   file: File | null;
   setFile: Dispatch<SetStateAction<File | null>>;
   transcript: string[];
@@ -34,8 +32,6 @@ interface AppContextProps {
 
 // AppContextを作成
 const AppContext = createContext<AppContextProps>({
-  count: 0,
-  setCount: (): number => 0,
   file: null,
   setFile: (): File | null => null,
   transcript: [],
@@ -69,7 +65,6 @@ export const AppContextProvider = ({
   children: React.ReactNode;
 }) => {
   // 初期値を設定
-  const [count, setCount] = useState(0);
   const [file, setFile] = useState<File | null>(null);
   const [lapTime, setLapTime] = useState<number[]>([]);
   const [transcript, setTranscript] = useState<string[]>([]);
@@ -85,8 +80,6 @@ export const AppContextProvider = ({
   return (
     <AppContext.Provider
       value={{
-        count,
-        setCount,
         file,
         setFile,
         lapTime,
