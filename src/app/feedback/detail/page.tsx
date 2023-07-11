@@ -70,32 +70,32 @@ export default function PageFeedback() {
           &nbsp;
           {lapMinutes < 10 ? "0" + lapMinutes : lapMinutes}:
           {lapSeconds < 10 ? "0" + lapSeconds : lapSeconds}
-          <div className={styles.speed_text}>
-            <div className={styles.speed_text_time}>
-              <i className="bi bi-alarm-fill" />
-              &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/分
-            </div>
-            <div
-              className={
-                styles.speed_text_description +
-                " " +
-                (speed == 0
-                  ? styles.green
-                  : speed == -1 || speed == 1
-                  ? styles.orange
-                  : styles.red)
-              }
-            >
-              {speed == 0
-                ? "適切な速さ"
-                : speed == -1
-                ? "少し遅い"
-                : speed == 1
-                ? "少し早い"
-                : speed == -2
-                ? "非常に遅い"
-                : "非常に早い"}
-            </div>
+        </div>
+        <div className={styles.speed_text}>
+          <div className={styles.speed_text_time}>
+            <i className="bi bi-alarm-fill" />
+            &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/min
+          </div>
+          <div
+            className={
+              styles.speed_text_description +
+              " " +
+              (speed == 0
+                ? styles.green
+                : speed == -1 || speed == 1
+                ? styles.orange
+                : styles.red)
+            }
+          >
+            {speed == 0
+              ? "適切な速さ"
+              : speed == -1
+              ? "少し遅い"
+              : speed == 1
+              ? "少し早い"
+              : speed == -2
+              ? "非常に遅い"
+              : "非常に早い"}
           </div>
         </div>
         <div className={styles.feedback_text}>

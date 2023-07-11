@@ -41,7 +41,7 @@ export default function Home() {
           <div className={styles.amount_speed_text}>発音スピード</div>
           <div className={styles.amount_speed_text_time}>
             <i className="bi bi-alarm-fill" />
-            <div>&nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/分</div>
+            <div>&nbsp;{Math.floor(totalStringPerMinute)}&nbsp;字/min</div>
             <div
               className={
                 styles.amount_speed_text_description +
@@ -74,11 +74,12 @@ export default function Home() {
             const speed = valSpeed(stringPerMinute);
             return (
               <div key={index} className={styles.lap_time_text}>
-                {index + 1}ページ目
-                <div className={styles.lap_time_divide_border} />
-                <i className="bi bi-clock-fill" />
-                &nbsp;{minutes < 10 ? "0" + minutes : minutes}:
-                {seconds < 10 ? "0" + seconds : seconds}
+                <div>{index + 1}ページ目</div>
+                <div>
+                  <i className="bi bi-clock-fill" />
+                  &nbsp;{minutes < 10 ? "0" + minutes : minutes}:
+                  {seconds < 10 ? "0" + seconds : seconds}
+                </div>
                 <div
                   className={
                     styles.lap_speed_text_description +

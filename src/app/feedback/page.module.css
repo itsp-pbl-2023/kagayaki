@@ -134,8 +134,8 @@
 }
 
 .lap_time_text {
-  display: flex;
-  justify-content: left;
+  display: grid;
+  grid-template-columns: 120px 100px 150px;
   align-items: center;
   width: 350px;
   font-size: 20px;
