@@ -18,6 +18,10 @@ type FeedbackTypes = {
   question_3: string;
 };
 
+type PageFeedbackTypes = {
+  text: string[];
+};
+
 // AppContextとして使用する値の型を定義
 interface AppContextProps {
   file: File | null;
@@ -28,6 +32,8 @@ interface AppContextProps {
   setLapTime: Dispatch<SetStateAction<number[]>>;
   feedbacks: FeedbackTypes;
   setFeedbacks: Dispatch<SetStateAction<FeedbackTypes>>;
+  pageFeedbacks: PageFeedbackTypes;
+  setPageFeedbacks: Dispatch<SetStateAction<PageFeedbackTypes>>;
 }
 
 // AppContextを作成
@@ -56,6 +62,12 @@ const AppContext = createContext<AppContextProps>({
     question_2: "",
     question_3: "",
   }),
+  pageFeedbacks: {
+    text: [],
+  },
+  setPageFeedbacks: (): PageFeedbackTypes => ({
+    text: [],
+  }),
 });
 
 // AppContextをProviderでラップする
@@ -77,6 +89,10 @@ export const AppContextProvider = ({
     question_2: "",
     question_3: "",
   });
+  const [pageFeedbacks, setPageFeedbacks] = useState<PageFeedbackTypes>({
+    text: [],
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -88,6 +104,8 @@ export const AppContextProvider = ({
         setTranscript,
         feedbacks,
         setFeedbacks,
+        pageFeedbacks,
+        setPageFeedbacks,
       }}
     >
       {children}

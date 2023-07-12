@@ -136,6 +136,7 @@
 }
 
 .feedback_text {
+  position: relative;
   display: flex;
   justify-content: left;
   align-items: center;

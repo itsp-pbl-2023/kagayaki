@@ -1,6 +1,7 @@
 "use client";
 
 import PdfViewer from "@/app/components/PdfViewer";
+import Loading from "@/app/components/Loading";
 import styles from "./page.module.css";
 import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
@@ -11,11 +12,13 @@ import { calcStringPerMinute, valSpeed } from "@/app/feedback/functions";
 export default function PageFeedback() {
   const [numPages, setNumPages] = useState(0);
   const [pageNum, setPageNum] = useState(0);
-  const { lapTime, transcript } = useAppContext();
+  const { lapTime, transcript, pageFeedbacks, setPageFeedbacks } =
+    useAppContext();
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [stringPerMinute, setStringPerMinute] = useState(0);
+  const [status, setStatus] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -31,6 +34,33 @@ export default function PageFeedback() {
     const speed = valSpeed(stringPerMinute);
     setSpeed(speed);
   }, [lapTime, transcript, pageNum, stringPerMinute]);
+
+  useEffect(() => {
+    setStatus(1);
+  }, []);
+
+  useEffect(() => {
+    if (pageFeedbacks["text"].length === 0 && status == 1) {
+      getPageFeedBacks();
+    }
+  }, [status]);
+
+  const getPageFeedBacks = async () => {
+    var fullText = "";
+    for (let i = 0; i < transcript.length; i++) {
+      fullText += `#### ページ ${i + 1} ####\n\n${transcript[i]}\n\n`;
+    }
+    try {
+      const res = await fetch(`/api/chatgpt`, {
+        method: "POST",
+        body: JSON.stringify({ type: "page", text: fullText }),
+      });
+      const data = res.json();
+      setPageFeedbacks(await data);
+    } catch {
+      console.log("APIの呼び出しに失敗しました。");
+    }
+  };
 
   return (
     <main className={styles.main_container}>
@@ -99,8 +129,8 @@ export default function PageFeedback() {
           </div>
         </div>
         <div className={styles.feedback_text}>
-          {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}
-          大変よくできていました。もう少し詳しく説明するとより良いと思います。また、説明の順番を変えるとよりわかりやすいと思います。さらに、説明の前に目次を入れるとより良いと思います。大変よくできていました。もう少し詳しく説明するとより良いと思います。また、説明の順番を変えるとよりわかりやすいと思います。
+          {pageFeedbacks["text"].length === 0 && <Loading size="small" />}
+          {pageFeedbacks["text"][pageNum]}
         </div>
       </div>
       <div className={styles.script_container}>

@@ -1,11 +1,25 @@
 import styles from "./Loading.module.css";
-export default function Loading() {
+
+type PropTypes = {
+  size: "large" | "small";
+};
+export default function Loading(props: PropTypes) {
   return (
     <div className={styles.loading}>
-      <div className={styles.loading_text}>
+      <div
+        className={
+          styles.loading_text +
+          (props.size === "small" ? " " + styles.loading_text_small : "")
+        }
+      >
         AIがフィードバックを準備しています
       </div>
-      <div className={styles.loader} />
+      <div
+        className={
+          styles.loader +
+          (props.size === "small" ? " " + styles.loader_small : "")
+        }
+      />
     </div>
   );
 }

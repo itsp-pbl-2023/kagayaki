@@ -1,5 +1,5 @@
 .loading {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 5;
@@ -23,6 +23,10 @@
   animation-timing-function: ease-in-out;
 }
 
+.loading_text_small {
+  font-size: 24px !important;
+}
+
 .loader {
   margin-left: 20px;
   width: 60px;
@@ -36,6 +40,13 @@
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   opacity: 1;
+}
+
+.loader_small {
+  width: 40px !important;
+  height: 40px !important;
+  border: solid 5px !important;
+  border-color: #e74c3c #ddd !important;
 }
 
 @keyframes fade {
