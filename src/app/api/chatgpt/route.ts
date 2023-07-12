@@ -1,6 +1,7 @@
+import { NextApiRequest } from "next";
 import { Configuration, OpenAIApi } from "openai";
 
-const prompt = `### 指示 ###
+const allPrompt = `### 指示 ###
 
 以下に入力するプレゼンテーションに対する良い点・悪い点をレビューしてください。出力は以下のJSON形式に厳密に従うこと。
 
@@ -32,8 +33,41 @@ const prompt = `### 指示 ###
 
 `;
 
-export async function POST(req: Request) {
-  const body = await new Response(req.body).text();
+const pagePrompt = `### 指示 ###
+以下に入力するプレゼンテーションの内容をそれぞれのページごとにフィードバックしてください。出力は以下のJSON形式に厳密に従い、入力で与えられた全てのページについてレビューすること。
+
+### 出力形式 ###
+
+{
+  "text": [ 
+            "**ここに ページ 1 についての評価を記入**",
+            "**ここに ページ 2 についての評価を記入**",
+            "**ここに ページ 3 についての評価を記入**",
+            "**ここに ページ 4 についての評価を記入**",
+            "**ここに ページ 5 についての評価を記入**",
+          ],
+}
+
+### 出力例 ###
+
+{
+  "text": [
+            "プレゼンテーションの内容はとても良くまとまっていて、理解しやすかったです。具体的な例を挙げて説明すると、より良いプレゼンテーションになるでしょう。",
+            "プレゼンテーションの内容はとても良くまとまっていて、理解しやすかったです。具体的な例を挙げて説明すると、より良いプレゼンテーションになるでしょう。",
+            "プレゼンテーションの内容はとても良くまとまっていて、理解しやすかったです。具体的な例を挙げて説明すると、より良いプレゼンテーションになるでしょう。",
+            "プレゼンテーションの内容はとても良くまとまっていて、理解しやすかったです。具体的な例を挙げて説明すると、より良いプレゼンテーションになるでしょう。",
+            "プレゼンテーションの内容はとても良くまとまっていて、理解しやすかったです。具体的な例を挙げて説明すると、より良いプレゼンテーションになるでしょう。",
+          ],
+}
+
+### 入力 ###
+
+`;
+
+export async function POST(req: NextApiRequest) {
+  // JSON型のbodyを取得
+  const { type, text } = await new Response(req.body).json();
+  const prompt = type === "all" ? allPrompt : pagePrompt;
 
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -45,13 +79,13 @@ export async function POST(req: Request) {
 
   try {
     // 設定を諸々のせてAPIとやり取り
-    console.log(prompt + body);
+    console.log(prompt + text);
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          content: prompt + body,
+          content: prompt + text,
         },
       ],
     });
