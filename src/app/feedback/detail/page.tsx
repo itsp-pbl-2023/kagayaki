@@ -6,6 +6,7 @@ import { OnDocumentLoadSuccess } from "react-pdf/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "@/app/context/store";
+import { calcStringPerMinute, valSpeed } from "@/app/feedback/functions";
 
 const testPresentations = [
   `これから「ジュゴンとマナティーの違いについて」のプレゼンテーションを開始します。`,
@@ -33,6 +34,8 @@ export default function PageFeedback() {
   const [lapMinutes, setLapMinutes] = useState(0);
   const [lapSeconds, setLapSeconds] = useState(0);
   const [status, setStatus] = useState(0);
+  const [speed, setSpeed] = useState(0);
+  const [stringPerMinute, setStringPerMinute] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -41,7 +44,13 @@ export default function PageFeedback() {
   useEffect(() => {
     setLapMinutes(Math.floor(lapTime[pageNum] / 60000));
     setLapSeconds(Math.floor((lapTime[pageNum] % 60000) / 1000));
-  }, [lapTime, pageNum]);
+
+    setStringPerMinute(
+      calcStringPerMinute(transcript[pageNum], lapTime[pageNum])
+    );
+    const speed = valSpeed(stringPerMinute);
+    setSpeed(speed);
+  }, [lapTime, transcript, pageNum, stringPerMinute]);
 
   useEffect(() => {
     setStatus(1);
@@ -111,6 +120,33 @@ export default function PageFeedback() {
           {lapMinutes < 10 ? "0" + lapMinutes : lapMinutes}:
           {lapSeconds < 10 ? "0" + lapSeconds : lapSeconds}
         </div>
+        <div className={styles.speed_text}>
+          <div className={styles.speed_text_time}>
+            <i className="bi bi-alarm-fill" />
+            &nbsp;{Math.floor(stringPerMinute)}&nbsp;字/min
+          </div>
+          <div
+            className={
+              styles.speed_text_description +
+              " " +
+              (speed == 0
+                ? styles.green
+                : speed == -1 || speed == 1
+                ? styles.orange
+                : styles.red)
+            }
+          >
+            {speed == 0
+              ? "適切な速さ"
+              : speed == -1
+              ? "少し遅い"
+              : speed == 1
+              ? "少し早い"
+              : speed == -2
+              ? "非常に遅い"
+              : "非常に早い"}
+          </div>
+        </div>
         <div className={styles.feedback_text}>
           {/* TODO: 将来的には、実際のフィードバックに置き換える　*/}
           {pageFeedbacks[pageNum]}
@@ -120,10 +156,7 @@ export default function PageFeedback() {
         <div className={styles.script_icon}>
           <i className="bi bi-chat-left-text-fill" />
         </div>
-        <div className={styles.script_text}>
-          {/* TODO: 将来的には、実際のスクリプトに置き換える　*/}
-          {transcript[pageNum]}
-        </div>
+        <div className={styles.script_text}>{transcript[pageNum]}</div>
       </div>
     </main>
   );
