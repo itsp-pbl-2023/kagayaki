@@ -18,6 +18,7 @@ export default function PageFeedback() {
   const [lapSeconds, setLapSeconds] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [stringPerMinute, setStringPerMinute] = useState(0);
+  const [status, setStatus] = useState(0);
   const onDocumentLoadSuccess: OnDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
@@ -35,10 +36,14 @@ export default function PageFeedback() {
   }, [lapTime, transcript, pageNum, stringPerMinute]);
 
   useEffect(() => {
-    if (pageFeedbacks["text"].length === 0) {
+    setStatus(1);
+  }, []);
+
+  useEffect(() => {
+    if (pageFeedbacks["text"].length === 0 && status == 1) {
       getPageFeedBacks();
     }
-  }, []);
+  }, [status]);
 
   const getPageFeedBacks = async () => {
     var fullText = "";
@@ -59,7 +64,6 @@ export default function PageFeedback() {
 
   return (
     <main className={styles.main_container}>
-      {pageFeedbacks["text"].length === 0 && <Loading />}
       <div className={styles.top_container}>
         <div className={styles.page_text}>
           {pageNum + 1}&nbsp;/&nbsp;{numPages}&nbsp;ページ
@@ -125,6 +129,7 @@ export default function PageFeedback() {
           </div>
         </div>
         <div className={styles.feedback_text}>
+          {pageFeedbacks["text"].length === 0 && <Loading size="small" />}
           {pageFeedbacks["text"][pageNum]}
         </div>
       </div>

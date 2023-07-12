@@ -169,7 +169,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {status === 2 && <Loading />}
+      {status === 2 && <Loading size="large" />}
       <div className={styles.nav_container}>
         <div className={styles.page_text}>
           ページ&nbsp;
