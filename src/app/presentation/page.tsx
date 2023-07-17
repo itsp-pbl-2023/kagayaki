@@ -19,8 +19,14 @@ export default function Home() {
   const [timerSecond, setTimerSecond] = useState(0);
   const [lastTime, setLastTime] = useState(0);
   const [file, setFile] = useState<File | null>(null);
-  const { lapTime, setLapTime, transcript, setTranscript, setFeedbacks } =
-    useAppContext();
+  const {
+    lapTime,
+    setLapTime,
+    transcript,
+    setTranscript,
+    setFeedbacks,
+    setPageFeedbacks,
+  } = useAppContext();
   const [status, setStatus] = useState(0);
 
   const recorder = useRef<typeof MicRecorder>(null);
@@ -76,9 +82,9 @@ export default function Home() {
       }
     }
     try {
-      const res = await fetch(`/api/chatgpt/`, {
+      const res = await fetch(`/api/chatgpt`, {
         method: "POST",
-        body: fullText,
+        body: JSON.stringify({ type: "all", text: fullText }),
       });
       const data = res.json();
       setFeedbacks(await data);
@@ -119,6 +125,18 @@ export default function Home() {
     const tmp = Date.now();
     setLapTime([]);
     setTranscript([]);
+    setFeedbacks({
+      explanation: "",
+      logic: "",
+      informativeness: "",
+      fluency: "",
+      question_1: "",
+      question_2: "",
+      question_3: "",
+    });
+    setPageFeedbacks({
+      text: [],
+    });
     setInterval(() => {
       const elapsedTime = Date.now() - tmp;
       const minutes = Math.floor(elapsedTime / 60000);
@@ -151,7 +169,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {status === 2 && <Loading />}
+      {status === 2 && <Loading size="large" />}
       <div className={styles.nav_container}>
         <div className={styles.page_text}>
           ページ&nbsp;
